@@ -91,6 +91,10 @@
         </div>
       </div>
     </div>
+    <div class="WorkPosition_main">
+      <div lass="WorkPosition_main_left"></div>
+      <div lass="WorkPosition_main_right"></div>
+    </div>
   </div>
 </template>
 
