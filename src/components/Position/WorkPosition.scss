@@ -1,8 +1,8 @@
-.WorkPosition{
+.WorkPosition {
   width: 100%;
   padding: 0 100px;
 
-  &_header{
+  &_header {
     margin-top: 30px;
     height: 300px;
     border-radius: 8px;
@@ -11,10 +11,10 @@
     padding: 20px;
   }
 
-  &_search{
+  &_search {
     margin: 10px 80px;
-    
-    &_container{
+
+    &_container {
       background-color: rgba(0, 146, 65, 0.5);
       height: 50px;
       border-radius: 8px;
@@ -22,9 +22,9 @@
       display: flex;
     }
 
-    &_input{
+    &_input {
+      flex: 1;
       height: 44px;
-      width: 820px;
       margin: 3px 0;
       margin-left: 3px;
       border: none;
@@ -32,18 +32,17 @@
       border-radius: 8px;
       padding-left: 10px;
 
-      &:focus{
+      &:focus {
         caret-color: rgb(0, 146, 65);
       }
 
-      &::-webkit-input-placeholder{
+      &::-webkit-input-placeholder {
         color: #ccc;
       }
-
     }
 
-    &_sousuo{
-      flex: 1;
+    &_sousuo {
+      width: 100px;
       text-align: center;
       line-height: 50px;
       color: #fff;
@@ -51,29 +50,33 @@
     }
   }
 
-  &_hot{
-
-    &_com{
+  &_hot {
+    &_com {
       margin: 40px 80px 10px 80px;
     }
 
-    &_position{
+    &_position {
       margin-top: 20px;
     }
 
-    &_name{
+    &_name {
       margin-right: 20px;
     }
 
-    &_ul{
+    &_ul {
       display: inline-flex;
       column-gap: 30px;
-
-      li{}
     }
 
-    &_clear{
+    &_clear {
       float: right;
     }
+  }
+
+  &_selection {
+    display: inline-flex;
+    column-gap: 20px;
+    margin-left: 80px;
+    margin-top: 20px;
   }
 }
