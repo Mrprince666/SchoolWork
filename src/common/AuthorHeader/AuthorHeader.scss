@@ -1,0 +1,25 @@
+.AuthorHeader{
+  display: flex;
+
+  &_pic{
+    width: 40px;
+    height: 40px;
+    border-radius: 15px;
+  }
+
+  &_right{
+    margin-left: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    &_content{
+
+      display: flex;
+      column-gap: 20px;
+      font-size: 13px;
+      color: rgb(136, 135, 135);
+    }
+  }
+
+}

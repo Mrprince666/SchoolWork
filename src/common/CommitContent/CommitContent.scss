@@ -1,0 +1,37 @@
+.CommitContent{
+  margin-top: 20px;
+
+  &_title{
+    font-weight: 600;
+    margin-bottom: 10px;
+  }
+
+  &_content{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+  }
+
+  &_footer{
+    margin-top: 15px;
+
+    &_good{
+      display: flex;
+      align-items: center;
+      column-gap: 5px;
+
+      img{
+        width: 20px;
+        height: 20px;
+        cursor: pointer;
+      }
+
+      &_count{
+        color: rgb(182, 182, 182);
+        font-size: 14 px;
+      }
+    }
+  }
+}

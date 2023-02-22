@@ -1,0 +1,27 @@
+.CompanyPost{
+
+  &_top{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+
+    &_money{
+      color: #fe574a;
+    }
+  }
+
+  &_tab{
+    display: flex;
+    column-gap: 20px;
+    font-size: 13px;
+    color: rgb(136, 135, 135);
+
+
+    li{
+      padding: 3px 10px;
+      background-color: rgb(244, 244, 244);
+      border-radius: 3px;
+      
+    }
+  }
+}

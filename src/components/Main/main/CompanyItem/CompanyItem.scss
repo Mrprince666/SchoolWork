@@ -1,0 +1,31 @@
+.CompanyItem{
+  background-color: #fff;
+  width: 419px;
+  border-radius: 8px;
+  overflow: hidden;
+  transition: all 0.3s ease-in-out;
+
+  &_header{
+    padding: 20px;
+    background: linear-gradient(to right, rgba(0, 146, 45, 0.3), rgb(0, 146, 65 ,0.2));
+  }
+
+  &_post{
+    
+    &_li{
+      cursor: pointer;
+      padding: 20px;
+      transition: background-color 0.3s ease-in-out;
+      
+
+      &:not(:last-of-type){
+        border-bottom: 1px solid rgb(242, 242, 242);
+      }
+
+      &:hover{
+        background-color: rgba(0, 146, 65, 0.1);
+      }
+
+    }
+  }
+}

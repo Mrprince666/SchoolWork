@@ -1,0 +1,79 @@
+.WorkPosition{
+  width: 100%;
+  padding: 0 100px;
+
+  &_header{
+    margin-top: 30px;
+    height: 300px;
+    border-radius: 8px;
+    background-color: #fff;
+    overflow: hidden;
+    padding: 20px;
+  }
+
+  &_search{
+    margin: 10px 80px;
+    
+    &_container{
+      background-color: rgba(0, 146, 65, 0.5);
+      height: 50px;
+      border-radius: 8px;
+      overflow: hidden;
+      display: flex;
+    }
+
+    &_input{
+      height: 44px;
+      width: 820px;
+      margin: 3px 0;
+      margin-left: 3px;
+      border: none;
+      outline: none;
+      border-radius: 8px;
+      padding-left: 10px;
+
+      &:focus{
+        caret-color: rgb(0, 146, 65);
+      }
+
+      &::-webkit-input-placeholder{
+        color: #ccc;
+      }
+
+    }
+
+    &_sousuo{
+      flex: 1;
+      text-align: center;
+      line-height: 50px;
+      color: #fff;
+      font-size: 18px;
+    }
+  }
+
+  &_hot{
+
+    &_com{
+      margin: 40px 80px 10px 80px;
+    }
+
+    &_position{
+      margin-top: 20px;
+    }
+
+    &_name{
+      margin-right: 20px;
+    }
+
+    &_ul{
+      display: inline-flex;
+      column-gap: 30px;
+
+      li{}
+    }
+
+    &_clear{
+      float: right;
+    }
+  }
+}
