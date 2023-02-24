@@ -1,24 +1,24 @@
-.Home{
-  &_home{
+.Home {
+  &_home {
     position: relative;
     min-height: 100%;
-    min-width: 1320px;
+    // min-width: 1320px;
     background-color: rgb(247, 248, 249);
     padding-bottom: 50px;
   }
 
-  &_nav{
+  &_nav {
     position: sticky;
     top: 0;
     left: 0;
     z-index: 3;
   }
 
-  &_container{
-    padding: 0 100px;
-    width: 100%;
+  &_container {
+    //   padding: 0 100px;
+    margin: 0 auto;
+    // max-width: 1500px;
+    width: 1320px;
     box-sizing: border-box;
   }
-
-  
 }

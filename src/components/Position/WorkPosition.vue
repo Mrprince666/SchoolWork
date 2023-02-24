@@ -92,8 +92,10 @@
       </div>
     </div>
     <div class="WorkPosition_main">
-      <div lass="WorkPosition_main_left"></div>
-      <div lass="WorkPosition_main_right"></div>
+      <div class="WorkPosition_main_left">
+        <PositionItem />
+      </div>
+      <div class="WorkPosition_main_right"></div>
     </div>
   </div>
 </template>
@@ -101,8 +103,13 @@
 <script>
 import "./WorkPosition.scss";
 import { reactive, toRefs } from "vue";
+import PositionItem from "./PositionItem/PositionItem.vue";
 
 export default {
+  components: {
+    PositionItem,
+  },
+
   setup() {
     const state = reactive({
       cityList: [],

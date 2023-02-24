@@ -1,6 +1,7 @@
 .WorkPosition {
   width: 100%;
-  padding: 0 100px;
+  // max-width: 1500px;
+  // min-width: 1320px;
 
   &_header {
     margin-top: 30px;
@@ -78,5 +79,18 @@
     column-gap: 20px;
     margin-left: 80px;
     margin-top: 20px;
+  }
+
+  &_main {
+    display: flex;
+    margin-top: 50px;
+
+    &_left {
+      flex: 1;
+    }
+
+    &_right {
+      width: 300px;
+    }
   }
 }
