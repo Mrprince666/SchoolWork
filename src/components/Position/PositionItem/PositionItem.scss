@@ -1,6 +1,8 @@
 .PositionItem {
   background-color: #fff;
   font-size: 16px;
+  border-radius: 8px;
+  overflow: hidden;
 
   &_top {
     display: flex;

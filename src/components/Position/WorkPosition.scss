@@ -1,7 +1,5 @@
 .WorkPosition {
   width: 100%;
-  // max-width: 1500px;
-  // min-width: 1320px;
 
   &_header {
     margin-top: 30px;
@@ -87,6 +85,12 @@
 
     &_left {
       flex: 1;
+
+      &_item {
+        &:not(:last-of-type) {
+          margin-bottom: 80px;
+        }
+      }
     }
 
     &_right {

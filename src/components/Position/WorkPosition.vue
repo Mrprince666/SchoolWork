@@ -92,9 +92,11 @@
       </div>
     </div>
     <div class="WorkPosition_main">
-      <div class="WorkPosition_main_left">
-        <PositionItem />
-      </div>
+      <ul class="WorkPosition_main_left">
+        <li class="WorkPosition_main_left_item" v-for="item in 6" :key="item">
+          <PositionItem />
+        </li>
+      </ul>
       <div class="WorkPosition_main_right"></div>
     </div>
   </div>
