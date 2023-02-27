@@ -97,7 +97,14 @@
           <PositionItem />
         </li>
       </ul>
-      <div class="WorkPosition_main_right"></div>
+      <div class="WorkPosition_main_right">
+        <div class="WorkPosition_main_right_title">为您推荐</div>
+        <ul class="WorkPosition_main_right_item">
+          <li v-for="item in 4" :key="item">
+            <PositionRecommend></PositionRecommend>
+          </li>
+        </ul>
+      </div>
     </div>
   </div>
 </template>
@@ -106,10 +113,12 @@
 import "./WorkPosition.scss";
 import { reactive, toRefs } from "vue";
 import PositionItem from "./PositionItem/PositionItem.vue";
+import PositionRecommend from "./PositionRecommend/PositionRecommend.vue";
 
 export default {
   components: {
     PositionItem,
+    PositionRecommend,
   },
 
   setup() {
