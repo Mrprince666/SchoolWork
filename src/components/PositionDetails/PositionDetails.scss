@@ -1,0 +1,13 @@
+.PositionDetails{
+  margin-top: 30px;
+  width: 100%;
+  display: inline-flex;
+
+  &_main{
+    flex: 1;
+  }
+
+  &_right{
+    width: 350px;
+  }
+}

@@ -93,7 +93,12 @@
     </div>
     <div class="WorkPosition_main">
       <ul class="WorkPosition_main_left">
-        <li class="WorkPosition_main_left_item" v-for="item in 6" :key="item">
+        <li
+          class="WorkPosition_main_left_item"
+          v-for="item in 6"
+          :key="item"
+          @click="gotoDetails"
+        >
           <PositionItem />
         </li>
       </ul>
@@ -112,6 +117,7 @@
 <script>
 import "./WorkPosition.scss";
 import { reactive, toRefs } from "vue";
+import { useRouter } from "vue-router";
 import PositionItem from "./PositionItem/PositionItem.vue";
 import PositionRecommend from "./PositionRecommend/PositionRecommend.vue";
 
@@ -128,6 +134,8 @@ export default {
       durationList: [],
       moneyList: [],
     });
+
+    const router = useRouter();
 
     const type = {
       expandTrigger: "hover",
@@ -408,11 +416,16 @@ export default {
       console.log(state);
     };
 
+    const gotoDetails = () => {
+      router.push("/positionDetails");
+    };
+
     return {
       ...toRefs(state),
       handleChangeSelection,
       type,
       cityOptions,
+      gotoDetails,
     };
   },
 };

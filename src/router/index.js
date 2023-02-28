@@ -18,6 +18,12 @@ const routes = [
         name: "position",
         component: () => import("../components/Position/WorkPosition.vue"),
       },
+      {
+        path: "/positionDetails",
+        name: "positionDetails",
+        component: () =>
+          import("../components/PositionDetails/PositionDetails.vue"),
+      },
     ],
   },
   {
