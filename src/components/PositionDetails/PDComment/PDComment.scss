@@ -1,0 +1,88 @@
+.PDComment{
+  background-color: #fff;
+  margin-top: 30px;
+  border-radius: 8px;
+  overflow: hidden;
+  padding-bottom: 20px;
+
+  &_header{
+    height: 50px;
+    background-color: rgba(0, 146, 65, 0.1);
+    line-height: 50px;
+    padding-left: 20px;
+    color: rgb(0, 165, 65);
+  }
+
+  &_content{
+    margin-top: 20px;
+
+    &_comment{
+      margin: 20px;
+
+      &_item{
+        padding: 10px 0;
+        margin: 10px 0;
+
+        &:not(:last-of-type){
+          border-bottom: 1px solid rgb(242, 242, 242);
+        }
+
+        &_author{
+          display: flex;
+          align-items: center;
+          column-gap: 10px;
+        }
+
+        &_name{
+          font-size: 14px;
+          color: #555;
+        }
+
+        img{
+          width: 40px;
+          height: 40px;
+          border-radius: 50%;
+        }
+        
+      }
+
+      &_message{
+        margin-top: 15px;
+        font-size: 14px;line-height: 20px;
+
+        &_main{
+          overflow: hidden;
+          display: -webkit-box;
+          text-overflow: ellipsis;
+          -webkit-line-clamp: 3;
+          -webkit-box-orient: vertical;
+        }
+
+        &_other{
+          font-size: 12px;
+          color: rgb(0, 165, 65);
+          cursor: pointer;
+        }
+
+        &_good{
+          display: flex;
+          align-items: center;
+          column-gap: 5px;
+          margin-top: 10px;
+    
+          img{
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+          }
+    
+          &_count{
+            color: rgb(182, 182, 182);
+            font-size: 14 px;
+          }
+        }
+      }
+    }
+  }
+
+}

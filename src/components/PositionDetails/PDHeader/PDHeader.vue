@@ -31,7 +31,14 @@
         </div>
       </div>
     </div>
-    <div class="PDHeader_key"></div>
+    <div class="PDHeader_key">
+      <ul class="PDHeader_key_ul">
+        <li>产品经理</li>
+        <li>深圳</li>
+        <li>本科</li>
+        <li>2023届</li>
+      </ul>
+    </div>
   </div>
 </template>
 

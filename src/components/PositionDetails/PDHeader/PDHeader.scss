@@ -1,6 +1,8 @@
 .PDHeader{
   background-color: #fff;
   padding: 20px;
+  border-radius: 8px;
+
   &_header{
 
     &_main{
@@ -60,5 +62,21 @@
       }
     }
 
+  }
+
+  &_key{
+    margin-top: 15px;
+    &_ul{
+      display: flex;
+      column-gap: 15px;
+      color: rgb(144,144,144);
+      font-size: 13px;
+
+      li{
+        padding: 3px 10px;
+        background-color: rgb(244, 244, 244);
+        border-radius: 3px;
+      }
+    }
   }
 }

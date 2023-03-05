@@ -24,6 +24,12 @@ const routes = [
         component: () =>
           import("../components/PositionDetails/PositionDetails.vue"),
       },
+      {
+        path: "/CompanyDetails",
+        name: "CompanyDetails",
+        component: () =>
+          import("../components/CompanyDetails/CompanyDetails.vue"),
+      },
     ],
   },
   {

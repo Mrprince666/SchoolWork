@@ -1,0 +1,47 @@
+.PDContent{
+  margin-top: 30px;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+
+  &_title{
+    color: rgb(0, 146, 65);
+    margin-bottom: 15px;
+  }
+
+  &_describe{
+
+    &_ul{
+      display: flex;
+      column-gap: 15px;
+      color: rgb(144,144,144);
+      font-size: 13px;
+
+      li{
+        padding: 3px 10px;
+        background-color: rgb(244, 244, 244);
+        border-radius: 3px;
+      }
+    }
+  }
+
+  &_content{
+    margin-top: 30px;
+
+    &_describe{
+      white-space: pre-wrap;
+      line-height: 25px;
+      font-size: 14px;
+    }
+
+    &_up{
+      margin-top: 10px;
+      font-size: 14px;
+    }
+  }
+
+  &_a{
+    display: block;
+    white-space: pre-line !important;
+  }
+}

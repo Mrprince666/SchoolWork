@@ -23,6 +23,9 @@ a {
 #app {
   height: 100%;
   min-width: 1320px;
+
+  --el-color-primary: rgb(0, 146, 65);
+  --el-color-success: rgb(0, 146, 65);
 }
 
 a:hover,
