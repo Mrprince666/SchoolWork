@@ -1,0 +1,71 @@
+.MPCommentItem{
+
+  &_avater{
+    margin-bottom: 15px;
+  }
+
+  &_comment{
+    margin-bottom: 10px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 850px;
+    white-space: nowrap;
+    cursor: pointer;
+  }
+
+  &_content{
+    padding: 10px;
+    background-color: rgb(248, 248, 248);
+    border-radius: 6px;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+
+    &_author{
+      color: rgb(0, 146, 65);
+      margin-right: 8px;
+    }
+
+    &_comment{
+      display: inline-block;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 650px;
+      white-space: nowrap;
+    }
+  }
+
+  &_footer{
+    margin-top: 15px;
+    display: flex;
+    column-gap: 20px;
+    align-items: center;
+
+    &_good{
+      display: flex;
+      align-items: center;
+      column-gap: 8px;
+
+      img{
+        width: 20px;
+        height: 20px;
+      }
+
+      &_count{
+        color: rgb(182, 182, 182);
+      }
+    }
+
+    &_delete{
+      display: flex;
+      align-items: center;
+      
+      cursor: pointer;
+      img{
+        width: 20px;
+        height: 20px;
+      }
+    }
+  }
+}

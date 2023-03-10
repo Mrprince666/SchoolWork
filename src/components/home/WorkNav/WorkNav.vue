@@ -29,7 +29,7 @@
       <span>搜索</span>
     </div>
     <div class="Nav_right">
-      <span class="Nav_right_com">去企业版</span>
+      <span class="Nav_right_com" @click="gotoMyPage">去企业版</span>
       <button class="Nav_right_login">
         <router-link to="/login">登录 / 注册</router-link>
       </button>
@@ -61,9 +61,15 @@ export default {
       router.push(`/${tab}`);
     };
 
+    // 跳转到个人中心
+    const gotoMyPage = () => {
+      router.push("/myPage");
+    };
+
     return {
       ...toRefs(state),
       changeTab,
+      gotoMyPage,
     };
   },
 };

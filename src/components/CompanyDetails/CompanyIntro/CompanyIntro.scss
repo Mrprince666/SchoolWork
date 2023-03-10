@@ -1,3 +1,67 @@
 .CompanyIntro{
-  
+  margin-top: 30px;
+
+  &_title{
+    color: rgb(0, 146, 65);
+    margin-bottom: 15px;
+  }
+
+  &_introduction{
+    line-height: 25px;
+    margin-bottom: 30px;
+  }
+
+  &_details{
+    background-color: #f8f8f8;
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 30px;
+
+    li{
+      display: flex;
+      row-gap: 10px;
+      flex-direction: column;
+    }
+
+    &_ul{
+      display: grid;
+      grid-column-gap:30px;
+      grid-row-gap: 30px;
+      grid-template-columns: 1fr 200px 200px;
+
+      &_col{
+        margin-top: 30px;
+        display: flex;
+        flex-direction: column;
+        row-gap: 30px;
+        line-height: 25px;
+      }
+    }
+  }
+
+  &_address{
+
+    &_ul{
+      font-size: 14px;
+      display: flex;
+      flex-direction: column;
+      row-gap: 20px;
+      color: #555;
+
+      li{
+        padding: 15px 20px;
+        border-radius: 4px;
+        background-color: rgb(248, 248, 248);
+        display: flex;
+        align-items: center;
+        column-gap: 10px;
+
+        img{
+          cursor: pointer;
+          width: 20px;
+          height: 20px;
+        }
+      }
+    }
+  }
 }

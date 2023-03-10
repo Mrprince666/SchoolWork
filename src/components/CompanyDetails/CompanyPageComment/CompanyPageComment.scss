@@ -1,0 +1,16 @@
+.CompanyPageComment{
+  margin-top: 40px;
+
+  &_item{
+    display: flex;
+    flex-direction: column;
+    row-gap: 30px;
+
+    li{
+      &:not(:last-of-type){
+        padding-bottom: 30px;
+        border-bottom: 1px solid rgb(242, 242, 242);
+      }
+    }
+  }
+}

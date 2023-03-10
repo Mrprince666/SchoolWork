@@ -1,0 +1,47 @@
+.CPWelfare{
+  background-color: #fff;
+  border-radius: 8px;
+  overflow: hidden;
+
+  &_header{
+    background-color: rgba(0, 146, 65, 0.1);
+    padding: 10px 20px;
+  }
+
+  &_item{
+    margin: 20px;
+    display: flex;
+    align-items: center;
+    column-gap: 15px;
+
+    img{
+      width: 20px;
+      height: 20px;
+    }
+  }
+
+  &_content{
+    margin: 20px;
+
+    &_ul{
+
+      li{
+        display: inline-block;
+        background-color: #f8f8f8;
+        padding: 3px 15px;
+        color: #666;
+        max-width: 100px;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        margin-bottom: 15px;
+        font-size: 14px;
+        float: left;
+
+        &:not(:last-of-type){
+          margin-right: 15px;
+        }
+      }
+    }
+  }
+}

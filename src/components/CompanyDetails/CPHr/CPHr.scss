@@ -1,0 +1,28 @@
+.CPHr{
+  background-color: #fff;
+  margin-top: 25px;
+  border-radius: 8px;
+  overflow: hidden;
+
+  &_header{
+    background-color: rgba(0, 146, 65, 0.1);
+    padding: 10px 20px;
+  }
+
+  &_content{
+    padding: 20px;
+
+    &_ul{
+
+      li{
+        padding-bottom: 20px;
+        margin-bottom: 20px;
+        cursor: pointer;
+
+        &:not(:last-of-type){
+          border-bottom: 1px solid rgb(242, 242, 242);
+        }
+      }
+    }
+  }
+}

@@ -100,7 +100,6 @@
     }
 
     &_right{
-      background-color: #fff;
       width: 350px;
       border-radius: 8px;
     }
@@ -112,10 +111,12 @@
     height: 25px;
     padding-bottom: 10px;
     margin-bottom: 20px;
+    font-size: 18px;
     border-bottom: 1px solid rgb(242, 242, 242);
 
     li{
       line-height: 25px;
+      cursor: pointer;
     }
     
 
@@ -127,7 +128,7 @@
       &::after{
         content: '';
         position: absolute;
-        width: 35px;
+        width: 42px;
         height: 6px;
         background-color: rgba(0, 146, 65, 0.5);
         left: 0;

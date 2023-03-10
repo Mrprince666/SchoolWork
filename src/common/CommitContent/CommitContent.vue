@@ -9,6 +9,14 @@
         <img src="../../assets/imgs/common/good.png" alt="点赞" />
         <span class="CommitContent_footer_good_count">999</span>
       </span>
+      <span class="CommitContent_footer_good">
+        <img src="../../assets/imgs/common/collent-grey.png" alt="收藏" />
+        <span class="CommitContent_footer_good_count">收藏</span>
+      </span>
+      <span class="CommitContent_footer_good">
+        <img src="../../assets/imgs/common/chat-grey.png" alt="评论" />
+        <span class="CommitContent_footer_good_count">评论</span>
+      </span>
     </div>
   </div>
 </template>

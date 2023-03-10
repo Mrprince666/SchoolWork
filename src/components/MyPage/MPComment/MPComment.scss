@@ -1,0 +1,16 @@
+.MPComment{
+  background-color: #fff;
+  border-radius: 8px;
+  padding: 20px;
+
+  &_list{
+
+    &_item{
+      &:not(:last-of-type){
+        border-bottom: 1px solid rgb(242, 242, 242);
+        padding-bottom: 25px;
+        margin-bottom: 25px;
+      }
+    }
+  }
+}

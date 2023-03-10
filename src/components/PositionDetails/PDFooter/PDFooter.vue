@@ -9,7 +9,7 @@
       <div class="PDFooter_hr_content">
         <div class="PDFooter_hr_content_name">
           <span>王先生</span>
-          <span class="PDFooter_hr_content_name_chat">
+          <span class="PDFooter_hr_content_name_chat" @click="gotoChatRoom">
             <img src="../../../assets/imgs/common/chat.png" alt="" />
           </span>
         </div>
@@ -41,10 +41,21 @@
 
 <script>
 import "./PDFooter.scss";
+import { useRouter } from "vue-router";
 
 export default {
   setup() {
-    return {};
+    const router = useRouter();
+
+    const gotoChatRoom = () => {
+      router.push({
+        path: "/ChatRoom",
+      });
+    };
+
+    return {
+      gotoChatRoom,
+    };
   },
 };
 </script>

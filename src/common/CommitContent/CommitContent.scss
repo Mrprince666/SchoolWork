@@ -16,6 +16,8 @@
 
   &_footer{
     margin-top: 15px;
+    display: flex;
+    column-gap: 30px;
 
     &_good{
       display: flex;

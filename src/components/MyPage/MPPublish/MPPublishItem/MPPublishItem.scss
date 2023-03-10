@@ -1,0 +1,67 @@
+.MPPublishItem{
+
+  &_avater{
+    margin-bottom: 15px;
+  }
+
+  &_title{
+    font-weight: 600;
+    margin-bottom: 10px;
+  }
+
+  &_content{
+    width: 800px;
+    
+
+    &_more{
+      margin-top: 5px;
+      font-size: 14px;
+      color: rgb(0, 146, 65);
+      cursor: pointer;
+    }
+
+    &_message{
+      width: 800px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 2;
+      word-break: break-all;
+      line-height: 25px;
+      font-size: 14px;
+    }
+  }
+
+  &_footer{
+    margin-top: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    &_good{
+      display: flex;
+      align-items: center;
+      column-gap: 8px;
+
+      img{
+        width: 20px;
+        height: 20px;
+      }
+
+      &_count{
+        color: rgb(182, 182, 182);
+      }
+    }
+
+    &_right{
+      display: flex;
+      column-gap: 15px;
+      color: rgb(0, 146, 65);
+
+      span{
+        cursor: pointer;
+      }
+    }
+  }
+}
