@@ -6,16 +6,24 @@
     <div class="CRoomLeftHr_right">
       <div class="CRoomLeftHr_right_info">
         <div class="CRoomLeftHr_right_info_content">
-          <span class="CRoomLeftHr_right_info_content_name">江先生</span>
-          <span class="CRoomLeftHr_right_info_content_company">腾讯腾讯</span>
-          <span class="CRoomLeftHr_right_info_content_position">经理</span>
+          <span class="CRoomLeftHr_right_info_content_name">{{
+            userInfo.userName
+          }}</span>
+          <span class="CRoomLeftHr_right_info_content_company">{{
+            userInfo.shortName
+          }}</span>
+          <span class="CRoomLeftHr_right_info_content_position">{{
+            userInfo.position
+          }}</span>
         </div>
-        <div class="CRoomLeftHr_right_info_time">03-07</div>
+        <div class="CRoomLeftHr_right_info_time">
+          {{ standardTime(+roomInfo.time) }}
+        </div>
       </div>
       <div class="CRoomLeftHr_right_message">
-        <span class="CRoomLeftHr_right_message_content"
-          >您好，能和您沟通一下吗？我对这个岗位很有兴趣。</span
-        >
+        <span class="CRoomLeftHr_right_message_content">{{
+          roomInfo.message
+        }}</span>
         <span class="CRoomLeftHr_right_message_img">
           <img src="../../../../assets/imgs/common/delete.png" alt="" />
         </span>
@@ -26,10 +34,42 @@
 
 <script>
 import "./CRoomLeftHr.scss";
+import { standardTime } from "../../../../assets/js/standardTime";
+import { getOtherList } from "../../../../request/chat";
+import { reactive, toRefs, onMounted } from "vue";
+import { useStore } from "vuex";
 
 export default {
-  setup() {
-    return {};
+  props: ["roomInfo"],
+
+  setup(props) {
+    const store = useStore();
+
+    const state = reactive({
+      userInfo: {},
+    });
+    onMounted(() => {
+      getUserInfo();
+    });
+
+    const getUserInfo = async () => {
+      const params = {
+        otherId:
+          props.roomInfo.otherId === props.userId
+            ? props.roomInfo.oneId
+            : props.roomInfo.otherId,
+      };
+      const { data: res } = await getOtherList(params);
+      if (res.status === 0) {
+        state.userInfo = res.data;
+        store.commit("chat/setUserInfo", res.data);
+      }
+    };
+
+    return {
+      ...toRefs(state),
+      standardTime,
+    };
   },
 };
 </script>

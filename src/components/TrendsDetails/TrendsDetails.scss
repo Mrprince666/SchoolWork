@@ -45,4 +45,31 @@
       }
     }
   }
+
+  &_footer{
+    margin-top: 30px;
+  }
+
+  &_title{
+    color: rgb(0, 146, 65);
+  }
+
+  &_nothing{
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+  }
+
+  &_comment{
+    margin-top: 30px;
+
+    &_item{
+      padding-bottom: 20px;
+      margin-bottom: 20px;
+
+      &:not(:last-of-type){
+        border-bottom: 1px solid rgb(242, 242, 242);
+      }
+    }
+  }
 }

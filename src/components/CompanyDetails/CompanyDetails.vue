@@ -52,9 +52,9 @@
           <div v-show="tab === 1">
             <CompanyPagePosition />
           </div>
-          <div v-show="tab === 2">
+          <!-- <div v-show="tab === 2">
             <CompanyPageComment />
-          </div>
+          </div> -->
         </div>
       </div>
       <div class="CompanyDetails_container_right">
@@ -73,7 +73,7 @@
 import "./CompanyDetails.scss";
 import { reactive, toRefs } from "vue";
 import CompanyIntro from "./CompanyIntro/CompanyIntro.vue";
-import CompanyPageComment from "./CompanyPageComment/CompanyPageComment.vue";
+// import CompanyPageComment from "./CompanyPageComment/CompanyPageComment.vue";
 import CompanyPagePosition from "./CompanyPagePosition/CompanyPagePosition.vue";
 import CPWelfare from "./CPWelfare/CPWelfare.vue";
 import CPHr from "./CPHr/CPHr.vue";
@@ -81,7 +81,7 @@ import CPHr from "./CPHr/CPHr.vue";
 export default {
   components: {
     CompanyIntro,
-    CompanyPageComment,
+    // CompanyPageComment,
     CompanyPagePosition,
     CPWelfare,
     CPHr,

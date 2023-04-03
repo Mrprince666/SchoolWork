@@ -1,17 +1,41 @@
 <template>
   <div class="CommitContent">
-    <div class="CommitContent_title">我们的差别在哪？</div>
-    <div class="CommitContent_content">
-      我是现在发现，好学校出来的工资和一般学校的工资能差不少，大厂效益好，能出得起钱，但一般学校的不太好进去，之前我和一个大厂的hr聊了下，因为学校不好，直接说我这种只能走外包的形势，外包一般就12薪了，不像大厂16薪的都有，这一下子收入差距就拉开了。
-    </div>
+    <div class="CommitContent_title">{{ title }}</div>
+    <div class="CommitContent_content">{{ content }}</div>
     <div class="CommitContent_footer">
-      <span class="CommitContent_footer_good">
-        <img src="../../assets/imgs/common/good.png" alt="点赞" />
-        <span class="CommitContent_footer_good_count">999</span>
+      <span class="CommitContent_footer_good" @click="changeCommentGood">
+        <img
+          src="../../assets/imgs/common/good.png"
+          alt="点赞"
+          v-if="!isGood"
+        />
+        <img src="../../assets/imgs/common/good_active.png" alt="点赞" v-else />
+        <span
+          :class="{
+            CommitContent_footer_good_count: true,
+            CommitContent_active: isGood,
+          }"
+          >{{ likeCount }}</span
+        >
       </span>
-      <span class="CommitContent_footer_good">
-        <img src="../../assets/imgs/common/collent-grey.png" alt="收藏" />
-        <span class="CommitContent_footer_good_count">收藏</span>
+      <span class="CommitContent_footer_good" @click="changeCommentCollect">
+        <img
+          src="../../assets/imgs/common/collent-grey.png"
+          alt="收藏"
+          v-if="!isCollect"
+        />
+        <img
+          src="../../assets/imgs/common/collect-active.png"
+          alt="收藏"
+          v-else
+        />
+        <span
+          :class="{
+            CommitContent_footer_good_count: true,
+            CommitContent_active: isCollect,
+          }"
+          >收藏</span
+        >
       </span>
       <span class="CommitContent_footer_good">
         <img src="../../assets/imgs/common/chat-grey.png" alt="评论" />
@@ -23,16 +47,146 @@
 
 <script>
 import "./CommitContent.scss";
-import { reactive, toRefs } from "vue";
+import { onMounted, reactive, toRefs } from "vue";
+import { useStore } from "vuex";
+import {
+  getGood,
+  addGood,
+  deleteGood,
+  getCollect,
+  addCollect,
+  deleteCollect,
+} from "../../request/comment.js";
+import { ElMessage } from "element-plus";
+import { useRouter } from "vue-router";
 
 export default {
-  setup() {
+  props: ["title", "content", "like", "commentId"],
+  setup(props) {
+    const store = useStore();
+    const router = useRouter();
+
     const state = reactive({
       isGood: false,
+      isCollect: false,
+      likeCount: props.like,
+      userId: store.state.user.userInfo.id,
     });
+
+    onMounted(() => {
+      console.log(state.likeCount, props);
+      getCommentGood();
+      getCommentCollect();
+    });
+
+    // 点赞
+    const getCommentGood = async () => {
+      const params = {
+        userId: state.userId,
+        commentId: props.commentId,
+      };
+      const { data: res } = await getGood(params);
+      if (res.status === 0) {
+        state.isGood = !!res.data;
+      }
+    };
+
+    const addCommentGood = async () => {
+      const params = {
+        userId: state.userId,
+        commentId: props.commentId,
+      };
+      const { data: res } = await addGood(params);
+      if (res.status === 0) {
+        state.isGood = true;
+        state.likeCount += 1;
+      } else {
+        ElMessage.error("点赞失败");
+      }
+    };
+
+    const deleteCommentGood = async () => {
+      const params = {
+        userId: state.userId,
+        commentId: props.commentId,
+      };
+      const { data: res } = await deleteGood(params);
+      if (res.status === 0) {
+        state.isGood = false;
+        state.likeCount -= 1;
+      } else {
+        ElMessage.error("取消失败");
+      }
+    };
+
+    const changeCommentGood = () => {
+      if (!state.userId) {
+        router.push("/login");
+        return ElMessage.warning("请先登录");
+      }
+      if (state.isGood) {
+        deleteCommentGood();
+      } else {
+        addCommentGood();
+      }
+    };
+
+    // 收藏
+    const getCommentCollect = async () => {
+      const params = {
+        userId: state.userId,
+        commentId: props.commentId,
+      };
+      const { data: res } = await getCollect(params);
+      if (res.status === 0) {
+        state.isCollect = !!res.data;
+      }
+    };
+
+    const addCommentCollect = async () => {
+      const params = {
+        userId: state.userId,
+        commentId: props.commentId,
+      };
+      const { data: res } = await addCollect(params);
+      if (res.status === 0) {
+        state.isCollect = true;
+        ElMessage.success("收藏成功");
+      } else {
+        ElMessage.error("点赞失败");
+      }
+    };
+
+    const deleteCommentCollect = async () => {
+      const params = {
+        userId: state.userId,
+        commentId: props.commentId,
+      };
+      const { data: res } = await deleteCollect(params);
+      if (res.status === 0) {
+        state.isCollect = false;
+        ElMessage.success("取消成功");
+      } else {
+        ElMessage.error("取消失败");
+      }
+    };
+
+    const changeCommentCollect = () => {
+      if (!state.userId) {
+        router.push("/login");
+        return ElMessage.warning("请先登录");
+      }
+      if (state.isCollect) {
+        deleteCommentCollect();
+      } else {
+        addCommentCollect();
+      }
+    };
 
     return {
       ...toRefs(state),
+      changeCommentGood,
+      changeCommentCollect,
     };
   },
 };

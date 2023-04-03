@@ -1,12 +1,15 @@
 <template>
   <div class="CompanyPost">
     <div class="CompanyPost_top">
-      <span>产品经理</span>
-      <span class="CompanyPost_top_money">15-20K</span>
+      <span>{{ positionInfo.name }}</span>
+      <span class="CompanyPost_top_money"
+        >{{ positionInfo.salaryLow }}-{{ positionInfo.salaryUp }}K</span
+      >
     </div>
     <ul class="CompanyPost_tab">
-      <li>深圳</li>
-      <li>本科</li>
+      <li v-for="item in positionInfo.describe" :key="item.id">
+        {{ item.content }}
+      </li>
     </ul>
   </div>
 </template>
@@ -15,6 +18,8 @@
 import "./CompanyPost.scss";
 
 export default {
+  props: ["positionInfo"],
+
   setup() {
     return {};
   },

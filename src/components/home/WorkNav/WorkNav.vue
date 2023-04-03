@@ -18,10 +18,18 @@
         >
           职位
         </li>
-        <li>校园</li>
-        <li>东莞理工</li>
-        <li>兼职</li>
-        <li>广场</li>
+        <li
+          @click="changeTab('schoolDgut')"
+          :class="tab === 'schoolDgut' && 'Nav_tab_active'"
+        >
+          东莞理工
+        </li>
+        <li
+          @click="changeTab('commentSquare')"
+          :class="tab === 'commentSquare' && 'Nav_tab_active'"
+        >
+          广场
+        </li>
       </ul>
     </div>
     <div class="Nav_search">

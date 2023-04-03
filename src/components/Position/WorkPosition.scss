@@ -65,6 +65,18 @@
     &_ul {
       display: inline-flex;
       column-gap: 30px;
+
+      li{
+        cursor: pointer;
+
+        &:hover{
+          color: rgb(0, 146, 65);
+        }
+      }
+
+      &_li{
+        color: rgb(0, 146, 65);
+      }
     }
 
     &_clear {

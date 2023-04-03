@@ -1,0 +1,67 @@
+.MPUserInfo{
+  border-radius: 8px;
+  overflow: hidden;
+
+  &_title{
+    background-color: #fff;
+    padding: 20px;
+  }
+
+  &_content{
+    padding: 20px;
+    background-color: rgba(0, 146, 65, 0.1);
+    color: #495060;
+    display: grid;
+    grid-template-columns: repeat(2, 400px);
+    row-gap: 20px;
+  }
+
+  &_item{
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;
+
+    &_title{}
+
+    &_message{
+      background-color: #fff;
+      border: 0;
+      height: 30px;
+      width: 300px;
+      padding: 5px 10px;
+      border-radius: 3px;
+
+      &:focus{
+        outline: 1px solid rgb(0, 146, 65);
+      }
+    }
+  }
+
+  &_flooter{
+    background-color: #fff;
+    padding: 20px;
+    padding-bottom: 60px;
+
+    &_list{
+      float: right;
+    }
+
+    &_cancel{
+      background-color: #fff;
+      border: 1px solid rgb(0, 146, 65);
+      color: rgb(0, 146, 65);
+      padding: 8px 25px;
+      margin-right: 20px;
+      border-radius: 3px;
+    }
+
+    &_define{
+      background-color: #fff;
+      border: none;
+      background-color: rgb(0, 146, 65);
+      color: #fff;
+      padding: 8px 25px;
+      border-radius: 3px;
+    }
+  }
+}

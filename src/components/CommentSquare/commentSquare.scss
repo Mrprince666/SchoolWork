@@ -1,0 +1,99 @@
+.commentSquare{
+  margin-top: 30px;
+  
+
+  &_header{
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+
+    &_input{
+      background-color: #f8f8f8;
+      outline: none;
+      border: none;
+      width: 500px;
+      height: 26px;
+      padding: 10px;
+      margin-left: 160px;
+      font-size: 16px;
+     
+
+      &::placeholder{
+        color: #c4c3c3;
+      }
+    }
+
+    &_search{
+      margin-left: 20px;
+      border: none;
+      outline: none;
+      background-color: rgb(0, 146, 65);
+      padding: 8px 25px;
+      color: #fff;
+      border-radius: 3px;
+      cursor: pointer;
+    }
+
+    &_create{
+      float: right;
+      padding: 8px 25px;
+      color: rgb(0, 146, 65);
+      background-color: #fff;
+      outline: 0;
+      border: 1px solid rgb(0, 146, 65);
+      border-radius: 3px;
+      cursor: pointer;
+      margin-top: 5px;
+    }
+  }
+
+  &_content{
+    background-color: #fff;
+    margin-top: 30px;
+    padding: 50px 30px;
+    border-radius: 8px;
+    position: relative;
+
+    &_list{
+      &_item{
+        &:not(:last-of-type){
+          padding-bottom: 20px;
+          margin-bottom: 30px;
+          border-bottom: 1px solid rgb(242, 242, 242);
+        }
+      }
+    }
+
+    &_tab{
+      position: absolute;
+      right: 20px;
+      top: 20px;
+
+      &_button{
+        border: none;
+        outline: none;
+        background-color: #f8f8f8;
+        padding: 10px 30px;
+        cursor: pointer;
+        border-radius: 3px;
+
+        &:not(:last-of-type){
+          border-right: 1px solid #ececec;
+        }
+      }
+
+      &_active{
+        background-color: rgb(0, 146, 65);
+        color: #fff;
+      }
+    }
+  }
+
+  &_pagination{
+    margin-top: 30px;
+    
+    &_page{
+      float: right;
+    }
+  }
+}

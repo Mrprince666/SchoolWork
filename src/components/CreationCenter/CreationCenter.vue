@@ -31,7 +31,9 @@
           <span>图片</span>
         </li>
       </ul>
-      <button class="CreationCenter_footer_commit">发布</button>
+      <button class="CreationCenter_footer_commit" @click="handleCommit">
+        发布
+      </button>
     </div>
   </div>
 </template>
@@ -39,18 +41,49 @@
 <script>
 import "./CreationCenter.scss";
 import { reactive, toRefs } from "vue";
+import { ElMessage } from "element-plus";
+import { addComment } from "../../request/comment";
+import { useStore } from "vuex";
+import { useRouter } from "vue-router";
 
 export default {
   setup() {
+    const store = useStore();
+    const router = useRouter();
+
     const state = reactive({
       comment: {
         title: "",
         content: "",
       },
     });
+    const handleCommit = async () => {
+      const userId = store.state.user.userInfo.id;
+      if (!userId) {
+        router.push("/login");
+        ElMessage.warning("请先登录！");
+        return;
+      }
+      if (state.comment.content.trim() === "") {
+        ElMessage.error("请先评论");
+        return;
+      }
+      const params = {
+        ...state.comment,
+        time: new Date(),
+        userId,
+      };
+      const { data: res } = await addComment(params);
+      if (res.status === 0) {
+        ElMessage.success(res.message);
+      } else {
+        ElMessage.error(res.message);
+      }
+    };
 
     return {
       ...toRefs(state),
+      handleCommit,
     };
   },
 };

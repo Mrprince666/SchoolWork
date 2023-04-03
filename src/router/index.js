@@ -52,6 +52,23 @@ const routes = [
         component: () =>
           import("../components/TrendsDetails/TrendsDetails.vue"),
       },
+      {
+        path: "/schoolDgut",
+        name: "schoolDgut",
+        component: () => import("../components/SchoolDugt/SchoolDugt.vue"),
+      },
+      {
+        path: "/briefingDetails",
+        name: "briefingDetails",
+        component: () =>
+          import("../components/BriefingDetails/BriefingDetails.vue"),
+      },
+      {
+        path: "/commentSquare",
+        name: "commentSquare",
+        component: () =>
+          import("../components/CommentSquare/CommentSquare.vue"),
+      },
     ],
   },
   {

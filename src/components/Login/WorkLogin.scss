@@ -14,6 +14,7 @@
     background-color: white;
     border-radius: 8px;
     display: flex;
+    overflow: hidden;
   }
 
   &_left{
@@ -87,7 +88,7 @@
     &_form{
       display: flex;
       flex-direction: column;
-      margin-top: 50px;
+      margin-top: 40px;
       margin-left: 50%;
       transform: translateX(-50%);
       
@@ -119,7 +120,7 @@
       width: 220px;
       height: 40px;
       line-height: 25px;
-      margin-top: 30px;
+      margin-top: 10px;
       cursor: pointer;
       transition: opacity 0.3s ease-out;
 

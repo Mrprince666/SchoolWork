@@ -14,6 +14,9 @@
         <li :class="{ MyPage_tab_active: tab === 3 }" @click="changeTab(3)">
           收藏
         </li>
+        <li :class="{ MyPage_tab_active: tab === 4 }" @click="changeTab(4)">
+          个人信息
+        </li>
       </ul>
       <div class="MyPage_content">
         <div v-show="tab === 0">
@@ -23,17 +26,23 @@
           <MPPublish />
           <!-- <MPNotThing /> -->
         </div>
-        <div v-show="tab === 2">
+        <!-- <div v-show="tab === 2">
           <MPComment />
-        </div>
-        <div v-show="tab === 3">
+        </div> -->
+        <!-- <div v-show="tab === 3">
           <MPCollect />
+        </div> -->
+        <div v-show="tab === 4">
+          <MPUserInfo />
         </div>
       </div>
     </div>
     <div class="MyPage_right">
       <div class="MyPage_personal">
         <MPPersonal />
+      </div>
+      <div class="MyPage_appendix">
+        <MPAppendix />
       </div>
     </div>
   </div>
@@ -43,20 +52,24 @@
 import "./MyPage.scss";
 import MPPersonal from "./MPPersonal/MPPersonal.vue";
 import MPDelivery from "./MPDelivery/MPDelivery.vue";
-import MPComment from "./MPComment/MPComment.vue";
+// import MPComment from "./MPComment/MPComment.vue";
 import MPPublish from "./MPPublish/MPPublish.vue";
-import MPCollect from "./MPCollect/MPCollect.vue";
+// import MPCollect from "./MPCollect/MPCollect.vue";
 // import MPNotThing from "./MPNotThing/MPNotThing.vue";
 import { reactive, toRefs } from "vue";
+import MPAppendix from "./MPAppendix/MPAppendix.vue";
+import MPUserInfo from "./MPUserInfo/MPUserInfo.vue";
 
 export default {
   components: {
     MPPersonal,
     MPDelivery,
-    MPComment,
+    // MPComment,
     MPPublish,
-    MPCollect,
+    // MPCollect,
     // MPNotThing,
+    MPAppendix,
+    MPUserInfo,
   },
 
   setup() {

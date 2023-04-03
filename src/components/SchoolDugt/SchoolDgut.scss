@@ -1,0 +1,27 @@
+.dgut{
+
+  &_header{
+    margin-top: 30px;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+
+    &_nav{
+      display: flex;
+      column-gap: 50px;
+
+      &_item{
+        font-size: 18px;
+        cursor: pointer;
+        
+      }
+    }
+
+    &_active{
+      color: rgb(0, 146, 65);
+      font-weight: 600;
+      padding-bottom: 5px;
+      border-bottom: 2px solid rgba(0, 146, 65, 0.8);
+    }
+  }
+}

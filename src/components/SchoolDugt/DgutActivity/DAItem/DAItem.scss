@@ -1,0 +1,47 @@
+.DAItem{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  &_image{
+    &_img{
+      width: 100px;
+      height: 100px;
+    }
+  }
+
+  &_content{
+    margin-left: 40px;
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;
+
+    &_name{
+      font-weight: 600;
+      font-size: 18px;
+    }
+
+    &_time{
+    }
+
+    &_address{}
+  }
+
+  &_left{
+    display: flex;
+  }
+
+  &_right{
+      margin-right: 20px;
+
+      &_button{
+        background-color: rgb(0, 146, 65);
+        border: none;
+        outline: none;
+        padding: 8px 30px;
+        border-radius: 4px;
+        color: white;
+        cursor: pointer;
+      }
+  }
+}

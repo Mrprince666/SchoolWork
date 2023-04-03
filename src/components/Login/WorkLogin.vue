@@ -39,8 +39,27 @@
             class="Login_right_form_input"
           />
         </div>
-        <div class="Login_right_form" v-else>111</div>
-        <button class="Login_right_button">
+        <div class="Login_right_form" v-else>
+          <input
+            type="text"
+            v-model="register.phone"
+            placeholder="请输入手机号"
+            class="Login_right_form_input"
+          />
+          <input
+            type="password"
+            v-model="register.password"
+            placeholder="请输密码"
+            class="Login_right_form_input"
+          />
+          <input
+            type="text"
+            v-model="register.userName"
+            placeholder="请输用户名"
+            class="Login_right_form_input"
+          />
+        </div>
+        <button class="Login_right_button" @click="handleButton">
           {{ activeName === "login" ? "登录" : "注册" }}
         </button>
         <div class="Login_right_text">我要招聘</div>
@@ -51,26 +70,32 @@
 
 <script>
 import { reactive, toRefs } from "vue";
-// import { useRouter, useRoute } from "vue-router";
+import { useRouter } from "vue-router";
 import Logo from "../../common/Logo/WorkLogo.vue";
 import "./WorkLogin.scss";
-// import { useStore } from "vuex";
-// import { ElMessage } from "element-plus";
+import { register, login } from "../../request/user.js";
+import { useStore } from "vuex";
+import { ElMessage } from "element-plus";
 
 export default {
   components: {
     Logo,
   },
   setup() {
-    // const router = useRouter();
+    const router = useRouter();
     // const route = useRoute();
-    // const store = useStore();
+    const store = useStore();
 
     const state = reactive({
       activeName: "login",
       loginForm: {
         phone: "",
         password: "",
+      },
+      register: {
+        phone: "",
+        password: "",
+        userName: "",
       },
     });
 
@@ -79,9 +104,58 @@ export default {
       state.activeName = tab;
     };
 
+    const handleButton = () => {
+      state.activeName === "login" ? userLogin() : userRegister();
+    };
+
+    const userLogin = async () => {
+      if (
+        state.loginForm.phone.trim() === "" ||
+        state.loginForm.password.trim() === ""
+      ) {
+        ElMessage.error("信息未填写完整!");
+        return;
+      }
+      const { data: res } = await login(state.loginForm);
+      if (res.status === 0) {
+        store.commit("user/setToken", res.token);
+        store.commit("user/setUserInfo", res.data);
+        router.go(-1);
+        ElMessage.success(res.message);
+      } else {
+        ElMessage.error(res.message);
+      }
+    };
+
+    const userRegister = async () => {
+      if (
+        state.register.phone.trim() === "" ||
+        state.register.password.trim() === "" ||
+        state.register.userName.trim() === ""
+      ) {
+        ElMessage.error("信息未填写完整!");
+        return;
+      }
+      const { data: res } = await register(state.register);
+      if (res.status === 0) {
+        ElMessage.success(res.message);
+        state.loginForm.password = state.register.password;
+        state.loginForm.phone = state.register.phone;
+        state.register.password = "";
+        state.register.phone = "";
+        state.register.userName = "";
+        state.activeName = "login";
+      } else {
+        ElMessage.error(res.message);
+      }
+    };
+
     return {
       ...toRefs(state),
       changeTab,
+      userRegister,
+      userLogin,
+      handleButton,
     };
   },
 };

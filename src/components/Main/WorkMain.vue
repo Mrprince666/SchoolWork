@@ -9,10 +9,16 @@
     <div class="Main_content">
       <div class="Main_item">
         <div class="Main_item_title"># 热门职位</div>
-        <MainTab />
+        <MainTab
+          :tabs="positionTabs"
+          :activeTab="activePositionTab"
+          :changePositionTab="changePositionTab"
+        />
         <div class="Main_item_content">
           <ul class="Main_item_content_ul">
-            <li v-for="item in 7" :key="item"><WorkItem /></li>
+            <li v-for="item in positionList" :key="item.id">
+              <WorkItem :position="item" />
+            </li>
           </ul>
         </div>
       </div>
@@ -20,7 +26,9 @@
         <div class="Main_item_title"># 热门企业</div>
         <div class="Main_item_content">
           <ul class="Main_item_content_ul">
-            <li v-for="item in 7" :key="item"><CompanyItem /></li>
+            <li v-for="item in companyList" :key="item.id">
+              <CompanyItem :companyId="item.id" />
+            </li>
           </ul>
         </div>
       </div>
@@ -35,6 +43,9 @@ import WorkItem from "./main/WorkItem/WorkItem.vue";
 import Slide from "../home/Slide/WorkSlide.vue";
 import CompanyItem from "./main/CompanyItem/CompanyItem.vue";
 import MainCommit from "./main/Comment/MainComment.vue";
+import { reactive, toRefs, onMounted } from "vue";
+import { getPositionHotTabs, getPositionHotList } from "../../request/position";
+import { getHotCompanyList } from "../../request/company";
 
 export default {
   components: {
@@ -45,7 +56,59 @@ export default {
     MainCommit,
   },
   setup() {
-    return {};
+    const state = reactive({
+      positionTabs: [],
+      activePositionTab: 0,
+      positionList: [],
+      companyList: [],
+    });
+
+    onMounted(() => {
+      getPositionTab();
+      getCompanyIdLsit();
+    });
+
+    // 获取热门职位的tabs
+    const getPositionTab = async () => {
+      const { data: res } = await getPositionHotTabs();
+      if (res.status === 0) {
+        state.positionTabs = res.data;
+        state.activePositionTab = state.positionTabs[0].id;
+        getPositionList();
+      }
+    };
+
+    // 获取热门职位列表
+    const getPositionList = async () => {
+      const params = {
+        tradeId: state.activePositionTab,
+      };
+      const { data: res } = await getPositionHotList(params);
+      if (res.status === 0) {
+        state.positionList = res.data;
+      }
+    };
+
+    // 切换职位tab
+    const changePositionTab = (tab) => {
+      if (tab !== state.activePositionTab) {
+        state.activePositionTab = tab;
+        getPositionList();
+      }
+    };
+
+    // 获取热门公司列表id
+    const getCompanyIdLsit = async () => {
+      const { data: res } = await getHotCompanyList();
+      if (res.status === 0) {
+        state.companyList = res.data;
+      }
+    };
+
+    return {
+      ...toRefs(state),
+      changePositionTab,
+    };
   },
 };
 </script>

@@ -1,0 +1,39 @@
+.MPAppendix{
+  margin-bottom: 20px;
+
+  &_title{
+    background-color: rgba(0, 146, 65, 0.1);
+    padding: 10px;
+  }
+
+  &_content{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 20px;
+    margin-top: 40px;
+    padding-bottom: 15px;
+    border-bottom: 2px solid #f4f4f4;
+  }
+
+  &_delete{
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+  }
+
+  &_upload{
+    margin-top: 30px;
+    text-align: center;
+
+    &_button{
+      outline: none;
+      border: 0;
+      background-color: rgb(0, 146, 65);
+      color: #fff;
+      padding: 8px 25px;
+      border-radius: 3px;
+      cursor: pointer;
+    }
+  }
+}

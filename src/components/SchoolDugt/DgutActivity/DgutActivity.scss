@@ -1,0 +1,27 @@
+.DgutActivity{
+  background-color: #fff;
+  margin-top: 30px;
+  padding-bottom: 10px;
+  border-radius: 8px;
+
+  &_list{
+    padding: 20px 40px;
+
+    &_item{
+      cursor: pointer;
+      &:not(:last-of-type){
+        padding-bottom: 30px;
+        margin-bottom: 30px;
+        border-bottom: 1px solid rgb(245,245,245);
+      }
+    }
+  }
+
+  &_pagination{
+    padding: 30px 20px;
+    
+    &_page{
+      float: right;
+    }
+  }
+}

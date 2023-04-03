@@ -3,37 +3,46 @@
     <div class="CRoomRight_header">
       <div class="CRoomRight_hr">
         <div class="CRoomRight_hr_left">
-          <span>江先生</span>
-          <span>腾讯科技有限公司</span>
-          <span>经理</span>
+          <span>{{ otherUserInfo.userName }}</span>
+          <span>{{ otherUserInfo.shortName }}</span>
+          <span>{{ otherUserInfo.position }}</span>
         </div>
         <div class="CRoomRight_hr_right">
           <button class="CRoomRight_hr_right_first">置顶</button>
         </div>
       </div>
       <div class="CRoomRight_positoin">
-        <span class="CRoomRight_positoin_name">产品经理PM</span>
-        <span class="CRoomRight_positoin_money">13-20K</span>
-        <span class="CRoomRight_positoin_city">深圳</span>
+        <span class="CRoomRight_positoin_name">{{ positionInfo.name }}</span>
+        <span class="CRoomRight_positoin_money"
+          >{{ positionInfo.salaryLow }}-{{ positionInfo.salaryUp }}K</span
+        >
+        <span class="CRoomRight_positoin_city">{{ positionInfo.city }}</span>
       </div>
     </div>
     <div class="CRoomRight_chat">
-      <ul class="CRoomRight_chat_list">
-        <li class="CRoomRight_chat_item" v-for="item in 4" :key="item">
-          <span class="CRoomRight_chat_item_message CRoomRight_chat_item_my"
-            >您好，能和您沟通一下吗？我对这个岗位很有兴趣。</span
-          >
-        </li>
-        <li class="CRoomRight_chat_item" v-for="item in 4" :key="item">
-          <span class="CRoomRight_chat_item_message CRoomRight_chat_item_hr"
-            >您好，能和您沟通一下吗？我对这个岗位很有兴趣。</span
+      <ul class="CRoomRight_chat_list" ref="chatDom">
+        <li
+          class="CRoomRight_chat_item"
+          v-for="item in chatList"
+          :key="item.id"
+        >
+          <span
+            :class="{
+              CRoomRight_chat_item_message: true,
+              CRoomRight_chat_item_my: userId === item.userId,
+              CRoomRight_chat_item_hr: userId !== item.userId,
+            }"
+            >{{ item.message }}</span
           >
         </li>
       </ul>
     </div>
     <div class="CRoomRight_footer">
       <div class="CRoomRight_footer_input">
-        <textarea placeholder="快来沟通一下吧！"></textarea>
+        <textarea placeholder="快来沟通一下吧！" v-model="message"></textarea>
+      </div>
+      <div class="CRoomRight_footer_send">
+        <button @click="sendMessage">发送</button>
       </div>
     </div>
   </div>
@@ -41,10 +50,84 @@
 
 <script>
 import "./CRoomRight.scss";
+import { useStore } from "vuex";
+import { reactive, toRefs, onMounted, ref } from "vue";
+import { getPositionInfo, getChatList, addChat } from "../../../request/chat";
 
 export default {
   setup() {
-    return {};
+    const store = useStore();
+    const chatDom = ref(null);
+    const state = reactive({
+      otherUserInfo: store.state.chat.otherUserInfo,
+      roomInfo: store.state.chat.roomInfo,
+      positionInfo: {},
+      chatList: [],
+      userId: store.state.user.userInfo.id,
+      message: "",
+    });
+
+    onMounted(() => {
+      getPosition();
+      getChat();
+      if (chatDom.value) {
+        setTimeout(() => {
+          chatDom.value.scrollTo({
+            top: chatDom.value.scrollHeight,
+            behavior: "smooth",
+          });
+        }, 100);
+      }
+    });
+
+    const getPosition = async () => {
+      const params = {
+        positionId: state.roomInfo.positionId,
+      };
+      const { data: res } = await getPositionInfo(params);
+      if (res.status === 0) {
+        state.positionInfo = res.data;
+      }
+    };
+
+    // 获取聊天列表
+    const getChat = async () => {
+      const params = {
+        chatroomId: state.roomInfo.id,
+      };
+      const { data: res } = await getChatList(params);
+      if (res.status === 0) {
+        state.chatList = res.data;
+      }
+    };
+
+    // 发送聊天信息
+    const sendMessage = async () => {
+      const params = {
+        chatroomId: state.roomInfo.id,
+        userId: state.userId,
+        time: new Date().getTime().toString(),
+        message: state.message,
+      };
+      const { data: res } = await addChat(params);
+      if (res.status === 0) {
+        state.chatList.push(res.data);
+        setTimeout(() => {
+          chatDom.value.scrollTo({
+            top: chatDom.value.scrollHeight,
+            behavior: "smooth",
+          });
+        }, 100);
+        state.message = "";
+      }
+      console.log(res);
+    };
+
+    return {
+      ...toRefs(state),
+      chatDom,
+      sendMessage,
+    };
   },
 };
 </script>

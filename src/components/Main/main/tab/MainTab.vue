@@ -1,11 +1,14 @@
 <template>
-  <div class="MainTab">
+  <div class="">
     <ul class="MainTab_ul">
-      <li class="active">IT/互联网</li>
-      <li>服务业</li>
-      <li>房地产</li>
-      <li>制造业</li>
-      <li>金融</li>
+      <li
+        :class="{ active: activeTab === item.id }"
+        v-for="item in tabs"
+        :key="item.id"
+        @click="changePositionTab(item.id)"
+      >
+        {{ item.name }}
+      </li>
     </ul>
   </div>
 </template>
@@ -14,6 +17,8 @@
 import "./MainTab.scss";
 
 export default {
+  props: ["tabs", "activeTab", "changePositionTab"],
+
   setup() {
     return {};
   },
