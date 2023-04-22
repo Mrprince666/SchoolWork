@@ -16,7 +16,11 @@
         />
         <div class="Main_item_content">
           <ul class="Main_item_content_ul">
-            <li v-for="item in positionList" :key="item.id">
+            <li
+              v-for="item in positionList"
+              :key="item.id"
+              @click="gotoPositionDetails(item.id)"
+            >
               <WorkItem :position="item" />
             </li>
           </ul>
@@ -46,6 +50,7 @@ import MainCommit from "./main/Comment/MainComment.vue";
 import { reactive, toRefs, onMounted } from "vue";
 import { getPositionHotTabs, getPositionHotList } from "../../request/position";
 import { getHotCompanyList } from "../../request/company";
+import { useRouter } from "vue-router";
 
 export default {
   components: {
@@ -56,9 +61,10 @@ export default {
     MainCommit,
   },
   setup() {
+    const router = useRouter();
     const state = reactive({
       positionTabs: [],
-      activePositionTab: 0,
+      activePositionTab: +sessionStorage.getItem("WorkMain_tab") || 0,
       positionList: [],
       companyList: [],
     });
@@ -74,6 +80,7 @@ export default {
       if (res.status === 0) {
         state.positionTabs = res.data;
         state.activePositionTab = state.positionTabs[0].id;
+        sessionStorage.setItem("WorkMain_tab", state.positionTabs[0].id);
         getPositionList();
       }
     };
@@ -93,6 +100,7 @@ export default {
     const changePositionTab = (tab) => {
       if (tab !== state.activePositionTab) {
         state.activePositionTab = tab;
+        sessionStorage.setItem("WorkMain_tab", tab);
         getPositionList();
       }
     };
@@ -105,9 +113,19 @@ export default {
       }
     };
 
+    const gotoPositionDetails = (positionId) => {
+      router.push({
+        path: "/positionDetails",
+        query: {
+          positionId,
+        },
+      });
+    };
+
     return {
       ...toRefs(state),
       changePositionTab,
+      gotoPositionDetails,
     };
   },
 };

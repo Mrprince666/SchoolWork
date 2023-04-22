@@ -6,6 +6,11 @@
     padding: 10px;
   }
 
+  &_onthing{
+    margin-top: 40px;
+    text-align: center;
+  }
+
   &_content{
     display: flex;
     align-items: center;
@@ -14,6 +19,29 @@
     margin-top: 40px;
     padding-bottom: 15px;
     border-bottom: 2px solid #f4f4f4;
+  }
+
+  &_name{
+    display: flex;
+    column-gap: 10px;
+
+    &_text{
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 180px;
+      white-space: nowrap;
+    }
+
+    &_img{
+      width: 25px;
+      height: 25px;
+    }
+  }
+
+  &_tips{
+    a {
+      color: rgb(0, 146, 65);
+    }
   }
 
   &_delete{
@@ -25,6 +53,10 @@
   &_upload{
     margin-top: 30px;
     text-align: center;
+
+    &_file{
+
+    }
 
     &_button{
       outline: none;

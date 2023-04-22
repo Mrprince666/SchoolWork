@@ -1,11 +1,7 @@
 <template>
   <div class="TDCommentItem">
     <div class="TDCommentItem_author">
-      <img
-        class="TDCommentItem_author_img"
-        src="../../../assets/imgs//main/tengxu_logo.jpg"
-        alt="头像"
-      />
+      <img class="TDCommentItem_author_img" :src="reply.pic" alt="头像" />
       <div class="TDCommentItem_author_right">
         <span class="TDCommentItem_author_right_name">
           <span>{{ reply.userName }}</span>

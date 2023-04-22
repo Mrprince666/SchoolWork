@@ -91,6 +91,7 @@ export default {
       loginForm: {
         phone: "",
         password: "",
+        type: 0,
       },
       register: {
         phone: "",

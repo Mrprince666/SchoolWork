@@ -66,9 +66,13 @@
         border: 1px solid rgb(0, 146, 65);
         padding: 8px 20px;
         background-color: #fff;
-        color: rgb(0, 146, 65);
+        
         border-radius: 5px;
         cursor: pointer;
+
+        a{
+          color: rgb(0, 146, 65);
+        }
       }
 
       &_upload{

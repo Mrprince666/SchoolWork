@@ -16,10 +16,11 @@
 
       li{
         padding-bottom: 20px;
-        margin-bottom: 20px;
+        
         cursor: pointer;
 
         &:not(:last-of-type){
+          margin-bottom: 20px;
           border-bottom: 1px solid rgb(242, 242, 242);
         }
       }

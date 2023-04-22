@@ -16,3 +16,21 @@ export function getHotCompany(params) {
     params,
   });
 }
+
+// 详情
+export function getDetails(params) {
+  return service({
+    method: "get",
+    url: "/company/getDetails",
+    params,
+  });
+}
+
+// 详情
+export function getCompanyPosition(params) {
+  return service({
+    method: "get",
+    url: "/company/getCompanyPosition",
+    params,
+  });
+}

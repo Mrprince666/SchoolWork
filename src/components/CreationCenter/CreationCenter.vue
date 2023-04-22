@@ -19,44 +19,96 @@
         v-model="comment.content"
       ></textarea>
     </div>
+    <div class="CreationCenter_talk">
+      <span class="CreationCenter_talk_label">话题(选填):</span>
+      <el-select
+        v-model="comment.moduleId"
+        class="m-2"
+        placeholder="请选择话题"
+      >
+        <el-option
+          v-for="item in positionList"
+          :key="item.id"
+          :label="item.name"
+          :value="item.id"
+        />
+      </el-select>
+    </div>
     <div class="CreationCenter_image">
-      <ul class="CreationCenter_image_list">
-        <li class="CreationCenter_image_list_item"></li>
-      </ul>
+      <span class="CreationCenter_talk_label">图片(最多一张):</span>
+      <UploadImgs
+        :limit="1"
+        :imgUrls="imgUrls"
+        :getBase64="getBase64"
+        :delBase64="delBase64"
+      />
     </div>
     <div class="CreationCenter_footer">
-      <ul class="CreationCenter_footer_function">
-        <li class="CreationCenter_footer_function_item">
-          <img src="../../assets/imgs/common/picture.png" alt="" />
-          <span>图片</span>
-        </li>
-      </ul>
-      <button class="CreationCenter_footer_commit" @click="handleCommit">
-        发布
-      </button>
+      <ul class="CreationCenter_footer_function"></ul>
+      <div>
+        <button
+          class="CreationCenter_footer_commit"
+          v-if="comment.id"
+          @click="updateCommentItem"
+        >
+          确定修改
+        </button>
+        <button
+          class="CreationCenter_footer_cancel"
+          v-if="comment.id"
+          @click="goback"
+        >
+          取消
+        </button>
+        <button
+          class="CreationCenter_footer_commit"
+          @click="handleCommit"
+          v-else
+        >
+          发布
+        </button>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
 import "./CreationCenter.scss";
-import { reactive, toRefs } from "vue";
+import { onMounted, reactive, toRefs, watch } from "vue";
 import { ElMessage } from "element-plus";
-import { addComment } from "../../request/comment";
+import { addComment, getACommnet, updateComment } from "../../request/comment";
+import { getAllPt } from "../../request/position";
 import { useStore } from "vuex";
-import { useRouter } from "vue-router";
+import { useRouter, useRoute } from "vue-router";
+import UploadImgs from "../../common/UploadImg/UploadImgs.vue";
 
 export default {
+  components: {
+    UploadImgs,
+  },
+
   setup() {
     const store = useStore();
     const router = useRouter();
+    const route = useRoute();
 
     const state = reactive({
       comment: {
         title: "",
         content: "",
+        moduleId: null,
+        companyId: null,
       },
+      positionList: [],
+      imgUrls: [],
+      base64: "",
+      pic: null,
     });
+
+    onMounted(() => {
+      getAllPosition();
+    });
+
     const handleCommit = async () => {
       const userId = store.state.user.userInfo.id;
       if (!userId) {
@@ -70,11 +122,73 @@ export default {
       }
       const params = {
         ...state.comment,
-        time: new Date(),
+        time: new Date().getTime(),
         userId,
+        imgData: state.base64,
       };
       const { data: res } = await addComment(params);
       if (res.status === 0) {
+        router.push("/commentSquare");
+        ElMessage.success(res.message);
+      } else {
+        ElMessage.error(res.message);
+      }
+    };
+
+    const getAllPosition = async () => {
+      const { data: res } = await getAllPt();
+      if (res.status === 0) {
+        state.positionList = res.data;
+      }
+    };
+
+    const getComment = async (id) => {
+      const params = {
+        id,
+      };
+      const { data: res } = await getACommnet(params);
+      if (res.status === 0) {
+        state.comment = res.data;
+        state.pic = res.data.pic;
+        state.imgUrls = [{ url: res.data.pic }];
+      }
+    };
+
+    watch(
+      () => route.query.id,
+      (id) => {
+        if (id) {
+          getComment(id);
+        }
+      },
+      { immediate: true }
+    );
+
+    const goback = () => {
+      router.go(-1);
+    };
+
+    const getBase64 = (base64) => {
+      state.base64 = base64;
+    };
+
+    const delBase64 = () => {
+      state.pic = null;
+    };
+
+    const updateCommentItem = async () => {
+      if (state.comment.content.trim() === "") {
+        ElMessage.error("请先评论");
+        return;
+      }
+      const params = {
+        ...state.comment,
+        pic: state.pic,
+        imgData: state.base64,
+      };
+      const { data: res } = await updateComment(params);
+      if (res.status === 0) {
+        goback();
         ElMessage.success(res.message);
       } else {
         ElMessage.error(res.message);
@@ -84,6 +198,10 @@ export default {
     return {
       ...toRefs(state),
       handleCommit,
+      goback,
+      getBase64,
+      delBase64,
+      updateCommentItem,
     };
   },
 };

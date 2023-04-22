@@ -1,12 +1,12 @@
 <template>
   <div class="CompanyHeader">
-    <img src="../../../../../assets/imgs/main/tengxu_logo.jpg" alt="企业logo" />
+    <img :src="companyInfo.pic" alt="企业logo" />
     <div class="CompanyHeader_right">
       <div class="CompanyHeader_right_name">{{ companyInfo.shortName }}</div>
       <ul class="CompanyHeader_right_tab">
-        <li>{{ companyInfo.finance }}</li>
-        <li>{{ companyInfo.employeeNum }}</li>
-        <li>{{ companyInfo.territory }}</li>
+        <li v-if="companyInfo.finance">{{ companyInfo.finance }}</li>
+        <li v-if="companyInfo.employeeNum">{{ companyInfo.employeeNum }}</li>
+        <li v-if="companyInfo.territory">{{ companyInfo.territory }}</li>
       </ul>
     </div>
   </div>

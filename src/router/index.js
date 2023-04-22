@@ -85,18 +85,13 @@ const router = createRouter({
 
 router.beforeEach((to, from, next) => {
   if (
-    to.path == "/chooseSeat" ||
-    to.path == "/user" ||
-    to.path == "/chooseSeat/seatSelection" ||
-    to.path == "/chooseSeat/confirmOrder" ||
-    to.path == "/user/myOrder" ||
-    to.path == "/user/myComments" ||
-    to.path == "/user/myBalance" ||
-    to.path == "/user/myInformation"
+    to.path == "/myPage" ||
+    to.path == "/ChatRoom" ||
+    to.path == "/creationCenter"
   ) {
     const token = sessionStorage.getItem("token");
     if (token === null || token === "") {
-      ElMessage.error("您还没有登录，请先登录");
+      ElMessage.warning("您还没有登录，请先登录");
       next("/login");
     } else {
       next();

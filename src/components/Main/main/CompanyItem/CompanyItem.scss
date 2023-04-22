@@ -6,6 +6,7 @@
   transition: all 0.3s ease-in-out;
 
   &_header{
+    cursor: pointer;
     padding: 20px;
     background: linear-gradient(to right, rgba(0, 146, 45, 0.3), rgb(0, 146, 65 ,0.2));
   }

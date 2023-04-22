@@ -16,6 +16,14 @@
   &_content{
     margin-top: 20px;
 
+    &_nothing{
+      height: 100px;
+      font-weight: 600;
+      text-align: center;
+      line-height: 100px;
+      color: #fe574a;
+    }
+
     &_comment{
       margin: 20px;
 
@@ -31,6 +39,12 @@
           display: flex;
           align-items: center;
           column-gap: 10px;
+
+          &_img{
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+          }
         }
 
         &_name{
@@ -38,17 +52,27 @@
           color: #555;
         }
 
-        img{
-          width: 40px;
-          height: 40px;
-          border-radius: 50%;
-        }
         
       }
 
       &_message{
         margin-top: 15px;
-        font-size: 14px;line-height: 20px;
+        font-size: 14px;
+        line-height: 20px;
+
+        &_image{
+          margin-top: 10px;
+
+          &_img{
+            max-height: 40px;
+            border-radius: 0;
+          }
+        }
+
+        &_title{
+          margin-bottom: 10px;
+          font-weight: 600;
+        }
 
         &_main{
           overflow: hidden;

@@ -57,3 +57,83 @@ export function getAllSalary() {
     url: "/position/getAllSalary",
   });
 }
+
+// 搜索职位
+export function selectPosition(params) {
+  return service({
+    method: "get",
+    url: "/position/selectPosition",
+    params,
+  });
+}
+
+// 搜索职位描述列表
+export function selectPositionDes(params) {
+  return service({
+    method: "get",
+    url: "/position/selectPositionDes",
+    params,
+  });
+}
+
+// 推荐职位
+export function recommendPosition(params) {
+  return service({
+    method: "get",
+    url: "/position/recommendPosition",
+    params,
+  });
+}
+
+// 详情职位
+export function getDetails(params) {
+  return service({
+    method: "get",
+    url: "/position/getDetails",
+    params,
+  });
+}
+
+// 职位hr
+export function getAHrMessage(params) {
+  return service({
+    method: "get",
+    url: "/position/getAHrMessage",
+    params,
+  });
+}
+
+// 职位地址
+export function getAddress(params) {
+  return service({
+    method: "get",
+    url: "/position/getAddress",
+    params,
+  });
+}
+
+// 职位评论
+export function getPositionComment(params) {
+  return service({
+    method: "get",
+    url: "/position/getPositionComment",
+    params,
+  });
+}
+
+// 职位分类
+export function getAllPt() {
+  return service({
+    method: "get",
+    url: "/position/getAllPt",
+  });
+}
+
+// 查看的简历情况
+export function getPositionDeliver(params) {
+  return service({
+    method: "get",
+    url: "/position/getPositionDeliver",
+    params,
+  });
+}

@@ -2,40 +2,57 @@
   <div class="PositionItem">
     <div class="PositionItem_top">
       <div class="PositionItem_message">
-        <div class="PositionItem_message_name">微信小程序开发工程师</div>
+        <div class="PositionItem_message_name">{{ position.name }}</div>
         <div class="PositionItem_message_select">
-          <span class="PositionItem_message_select_money">20-40K</span>
+          <span
+            class="PositionItem_message_select_money"
+            v-if="position.salaryType === 0"
+          >
+            {{ position.salaryLow }}-{{ position.salaryUp }}K
+          </span>
+          <span
+            class="PositionItem_message_select_money"
+            v-if="position.salaryType === 1"
+          >
+            {{ position.salaryLow }}百/天
+          </span>
+          <span
+            class="PositionItem_message_select_money"
+            v-if="position.salaryType === 2"
+          >
+            {{ position.salaryLow }}元/小时
+          </span>
           <ul class="PositionItem_message_select_ul">
-            <li>本科</li>
-            <li>2023届</li>
+            <li v-for="item in message" :key="item.id">
+              <span v-if="item.content">{{ item.content }}</span>
+            </li>
           </ul>
         </div>
       </div>
       <div class="PositionItem_company">
         <img
-          src="../../../assets/imgs/main/tengxu_logo.jpg"
+          :src="position.pic"
           alt="compaylLogo"
           class="PositionItem_company_logo"
         />
         <div class="PositionItem_company_right">
-          <div class="PositionItem_company_name">腾讯</div>
+          <div class="PositionItem_company_name">{{ position.shortName }}</div>
           <ul class="PositionItem_company_describe">
-            <li>互联网</li>
-            <li>不需要融资</li>
-            <li>10000人以上</li>
+            <li>{{ position.territory }}</li>
+            <li>{{ position.finance }}</li>
+            <li>{{ position.employeeNum }}</li>
           </ul>
         </div>
       </div>
     </div>
     <div class="PositionItem_bottom">
       <ul class="PositionItem_bottom_field">
-        <li>多线程</li>
-        <li>网络协议</li>
-        <li>Linux</li>
-        <li>后端开发</li>
+        <li v-for="item in describe" :key="item.id">
+          <span v-if="item.content">{{ item.content }}</span>
+        </li>
       </ul>
       <span class="PositionItem_bottom_welfare">
-        带薪年假，零食下午茶，五险一金，住房补贴，节日福利，员工旅游，交通补助，补充医疗保险，股票期权，定期体检，公仔周边活动，包吃，免费健身房，免费班车，餐补，年终奖，免费早晚餐
+        {{ treatment }}
       </span>
     </div>
   </div>
@@ -43,10 +60,42 @@
 
 <script>
 import "./PositionItem.scss";
+import { onMounted, reactive, toRefs } from "vue";
+import { selectPositionDes } from "../../../request/position";
 
 export default {
-  setup() {
-    return {};
+  props: ["position"],
+
+  setup(props) {
+    const state = reactive({
+      describe: [],
+      message: [],
+      treatment: "",
+    });
+
+    onMounted(() => {
+      getDes();
+    });
+
+    const getDes = async () => {
+      const parmas = {
+        id: props.position.id,
+        companyId: props.position.companyId,
+      };
+      const { data: res } = await selectPositionDes(parmas);
+      if (res.status === 0) {
+        state.describe = res.data.describe;
+        state.message = res.data.message;
+        state.treatment = res.data.treatment
+          .map((item) => {
+            return item.content;
+          })
+          .join("，");
+      }
+    };
+    return {
+      ...toRefs(state),
+    };
   },
 };
 </script>

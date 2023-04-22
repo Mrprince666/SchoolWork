@@ -115,3 +115,30 @@ export function getComment(params) {
     params,
   });
 }
+
+// 删除comment
+export function deleteComment(data) {
+  return service({
+    method: "post",
+    url: "/comment/deleteComment",
+    data,
+  });
+}
+
+// 创作中心的comment
+export function getACommnet(params) {
+  return service({
+    method: "get",
+    url: "/comment/getACommnet",
+    params,
+  });
+}
+
+// 修改comment
+export function updateComment(data) {
+  return service({
+    method: "post",
+    url: "/comment/updateComment",
+    data,
+  });
+}

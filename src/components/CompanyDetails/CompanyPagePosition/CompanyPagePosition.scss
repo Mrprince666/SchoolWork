@@ -10,10 +10,16 @@
   &_type{
     display: flex;
     column-gap: 30px;
+    position: relative;
 
     li{
       cursor: pointer;
     }
+  }
+
+  &_clear{
+    position: absolute;
+    right: 10px;
   }
 
   &_active{
@@ -97,11 +103,26 @@
 
   &_content{
 
+    &_nothing{
+      height: 120px;
+      line-height: 120px;
+      text-align: center;
+      font-size: 18px;
+      font-weight: 600;
+      color: #fe574a;
+    }
+
     &_ul{
       display: flex;
       flex-direction: column;
       row-gap: 20px;
 
+    }
+  }
+
+  &_pagination{
+    &_page{
+      float: right;
     }
   }
 

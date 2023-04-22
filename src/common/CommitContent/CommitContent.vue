@@ -1,7 +1,14 @@
 <template>
   <div class="CommitContent">
     <div class="CommitContent_title">{{ title }}</div>
-    <div class="CommitContent_content">{{ content }}</div>
+    <div class="CommitContent_content" @click="gotoDetails">{{ content }}</div>
+    <div class="CommitContent_image" v-if="image">
+      <img class="CommitContent_image_img" :src="image" alt="" />
+    </div>
+    <div class="CommitContent_module">
+      <span v-if="pName">#{{ pName }}#</span>
+      <span v-if="shortName">#{{ shortName }}#</span>
+    </div>
     <div class="CommitContent_footer">
       <span class="CommitContent_footer_good" @click="changeCommentGood">
         <img
@@ -37,7 +44,7 @@
           >收藏</span
         >
       </span>
-      <span class="CommitContent_footer_good">
+      <span class="CommitContent_footer_good" @click="gotoDetails">
         <img src="../../assets/imgs/common/chat-grey.png" alt="评论" />
         <span class="CommitContent_footer_good_count">评论</span>
       </span>
@@ -47,7 +54,7 @@
 
 <script>
 import "./CommitContent.scss";
-import { onMounted, reactive, toRefs } from "vue";
+import { reactive, toRefs, watch } from "vue";
 import { useStore } from "vuex";
 import {
   getGood,
@@ -61,7 +68,15 @@ import { ElMessage } from "element-plus";
 import { useRouter } from "vue-router";
 
 export default {
-  props: ["title", "content", "like", "commentId"],
+  props: [
+    "title",
+    "content",
+    "like",
+    "commentId",
+    "pName",
+    "shortName",
+    "image",
+  ],
   setup(props) {
     const store = useStore();
     const router = useRouter();
@@ -69,21 +84,24 @@ export default {
     const state = reactive({
       isGood: false,
       isCollect: false,
-      likeCount: props.like,
+      likeCount: 5,
       userId: store.state.user.userInfo.id,
+      commentId: 0,
     });
 
-    onMounted(() => {
-      console.log(state.likeCount, props);
-      getCommentGood();
-      getCommentCollect();
-    });
+    watch(
+      () => props.like,
+      (val) => {
+        state.likeCount = val;
+      },
+      { immediate: true }
+    );
 
     // 点赞
     const getCommentGood = async () => {
       const params = {
         userId: state.userId,
-        commentId: props.commentId,
+        commentId: state.commentId,
       };
       const { data: res } = await getGood(params);
       if (res.status === 0) {
@@ -94,7 +112,7 @@ export default {
     const addCommentGood = async () => {
       const params = {
         userId: state.userId,
-        commentId: props.commentId,
+        commentId: state.commentId,
       };
       const { data: res } = await addGood(params);
       if (res.status === 0) {
@@ -108,7 +126,7 @@ export default {
     const deleteCommentGood = async () => {
       const params = {
         userId: state.userId,
-        commentId: props.commentId,
+        commentId: state.commentId,
       };
       const { data: res } = await deleteGood(params);
       if (res.status === 0) {
@@ -135,7 +153,7 @@ export default {
     const getCommentCollect = async () => {
       const params = {
         userId: state.userId,
-        commentId: props.commentId,
+        commentId: state.commentId,
       };
       const { data: res } = await getCollect(params);
       if (res.status === 0) {
@@ -146,7 +164,7 @@ export default {
     const addCommentCollect = async () => {
       const params = {
         userId: state.userId,
-        commentId: props.commentId,
+        commentId: state.commentId,
       };
       const { data: res } = await addCollect(params);
       if (res.status === 0) {
@@ -160,7 +178,7 @@ export default {
     const deleteCommentCollect = async () => {
       const params = {
         userId: state.userId,
-        commentId: props.commentId,
+        commentId: state.commentId,
       };
       const { data: res } = await deleteCollect(params);
       if (res.status === 0) {
@@ -183,10 +201,32 @@ export default {
       }
     };
 
+    watch(
+      () => props.commentId,
+      (val) => {
+        state.commentId = val;
+        if (val) {
+          getCommentGood();
+          getCommentCollect();
+        }
+      },
+      { immediate: true }
+    );
+
+    const gotoDetails = () => {
+      router.push({
+        path: "/trendsDetails",
+        query: {
+          id: state.commentId,
+        },
+      });
+    };
+
     return {
       ...toRefs(state),
       changeCommentGood,
       changeCommentCollect,
+      gotoDetails,
     };
   },
 };

@@ -1,13 +1,15 @@
 <template>
   <div class="CPHrItem">
     <div class="CPHrItem_content">
-      <img src="../../../../assets/imgs/main/tengxu_logo.jpg" alt="" />
+      <img :src="hr.pic" alt="" />
       <div class="CPHrItem_content_messge">
-        <span class="CPHrItem_content_messge_name">邓先生</span>
-        <span class="CPHrItem_content_messge_position">招聘经理</span>
+        <span class="CPHrItem_content_messge_name">{{ hr.userName }}</span>
+        <span class="CPHrItem_content_messge_position">{{ hr.name }}</span>
       </div>
     </div>
-    <div class="CPHrItem_footer">在招职位：<span>1</span></div>
+    <div class="CPHrItem_footer">
+      在招职位：<span>{{ hr.num }}</span>
+    </div>
   </div>
 </template>
 
@@ -15,6 +17,8 @@
 import "./CPHrItem.scss";
 
 export default {
+  props: ["hr"],
+
   setup() {
     return {};
   },

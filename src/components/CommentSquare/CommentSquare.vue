@@ -1,12 +1,16 @@
 <template>
   <div class="commentSquare">
     <div class="commentSquare_header">
+      <span class="commentSquare_header_message">一起探索新世界！</span>
       <input
         class="commentSquare_header_input"
         type="text"
         placeholder="搜索关键词"
+        v-model="input"
       />
-      <button class="commentSquare_header_search">搜索</button>
+      <button class="commentSquare_header_search" @click="searchComment">
+        搜索
+      </button>
       <button class="commentSquare_header_create" @click="gotoCreate">
         发动态
       </button>
@@ -41,13 +45,13 @@
           最新
         </button>
       </div>
-      <div class="commentSquare_pagination" v-if="replyTotal !== 0">
+      <div class="commentSquare_pagination" v-if="total > pageCount">
         <el-pagination
           background
           layout="prev, pager, next"
           :total="total"
-          :page-size="5"
-          :current-page="1"
+          :page-size="pageCount"
+          :current-page="page"
           class="mt-4 commentSquare_pagination_page"
           @current-change="handleCurrentChange"
         />
@@ -79,8 +83,9 @@ export default {
       page: 1,
       pageCount: 10,
       commentList: [],
-      total: 19,
+      total: 0,
       userId: store.state.user.userInfo.id,
+      input: "",
     });
 
     onMounted(() => {
@@ -92,10 +97,12 @@ export default {
         type: state.type,
         page: state.page,
         pageCount: state.pageCount,
+        input: state.input,
       };
       const { data: res } = await getComment(params);
       if (res.status === 0) {
         state.commentList = res.data;
+        state.total = res.total;
       }
     };
 
@@ -116,10 +123,21 @@ export default {
       }
     };
 
+    const handleCurrentChange = (val) => {
+      state.page = val;
+      getCommentList();
+    };
+
+    const searchComment = () => {
+      getCommentList();
+    };
+
     return {
       ...toRefs(state),
       changeTab,
       gotoCreate,
+      handleCurrentChange,
+      searchComment,
     };
   },
 };

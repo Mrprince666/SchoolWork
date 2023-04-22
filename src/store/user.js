@@ -16,6 +16,12 @@ export default {
       state.token = data;
       sessionStorage.setItem("token", state.token);
     },
+    deleteUserInfo(state) {
+      state.userInfo = {};
+      state.token = "";
+      sessionStorage.removeItem("userInfo");
+      sessionStorage.removeItem("token");
+    },
   },
   actions: {},
 };

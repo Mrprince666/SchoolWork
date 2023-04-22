@@ -5,12 +5,22 @@
 
   &_list{
     &_item{
+      padding: 0  30px;
 
       &:not(:last-of-type){
         border-bottom: 1px solid rgb(242, 242, 242);
         padding-bottom: 25px;
         margin-bottom: 25px;
       }
+    }
+  }
+
+  &_pagination{
+    height: 60px;
+
+    &_page{
+      margin-top: 40px;
+      float: right;
     }
   }
 }

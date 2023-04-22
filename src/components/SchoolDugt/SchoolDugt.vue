@@ -52,11 +52,12 @@ export default {
 
   setup() {
     const state = reactive({
-      tab: 0,
+      tab: +sessionStorage.getItem("dgut_tab") || 0,
     });
 
     const changeNav = (tab) => {
       state.tab = tab;
+      sessionStorage.setItem("dgut_tab", tab);
     };
     return {
       ...toRefs(state),

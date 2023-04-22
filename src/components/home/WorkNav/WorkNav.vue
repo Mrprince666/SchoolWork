@@ -33,13 +33,19 @@
       </ul>
     </div>
     <div class="Nav_search">
-      <input type="text" placeholder="搜索职位、公司" />
-      <span>搜索</span>
+      <input type="text" placeholder="搜索职位、公司" v-model="input" />
+      <span @click="gotoPosition">搜索</span>
     </div>
     <div class="Nav_right">
-      <span class="Nav_right_com" @click="gotoMyPage">去企业版</span>
-      <button class="Nav_right_login">
-        <router-link to="/login">登录 / 注册</router-link>
+      <span class="Nav_right_com" v-if="!userId">去企业版</span>
+      <button class="Nav_right_login" v-if="!userId" @click="logout">
+        登录 / 注册
+      </button>
+      <button class="Nav_right_logout" v-if="userId" @click="logout">
+        退出
+      </button>
+      <button class="Nav_right_user" v-if="userId" @click="gotoMyPage">
+        个人中心
       </button>
     </div>
   </div>
@@ -50,6 +56,7 @@ import { reactive, toRefs } from "vue";
 import Logo from "../../../common/Logo/WorkLogo.vue";
 import "./WorkNav.scss";
 import { useRouter } from "vue-router";
+import { useStore } from "vuex";
 
 export default {
   components: {
@@ -58,14 +65,18 @@ export default {
 
   setup() {
     const router = useRouter();
+    const store = useStore();
 
     const state = reactive({
-      tab: "main",
+      tab: sessionStorage.getItem("WorkNav_tab") || "main",
+      userId: store.state.user.userInfo.id || "",
+      input: "",
     });
 
     // 跳转tab
     const changeTab = (tab) => {
       state.tab = tab;
+      sessionStorage.setItem("WorkNav_tab", tab);
       router.push(`/${tab}`);
     };
 
@@ -74,10 +85,26 @@ export default {
       router.push("/myPage");
     };
 
+    const logout = () => {
+      store.commit("user/deleteUserInfo");
+      router.push("/login");
+    };
+
+    const gotoPosition = () => {
+      router.push({
+        path: "/position",
+        query: {
+          input: state.input,
+        },
+      });
+    };
+
     return {
       ...toRefs(state),
       changeTab,
       gotoMyPage,
+      logout,
+      gotoPosition,
     };
   },
 };

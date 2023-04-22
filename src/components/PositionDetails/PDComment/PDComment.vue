@@ -5,43 +5,77 @@
       <ul class="PDComment_content_comment">
         <li
           class="PDComment_content_comment_item"
-          v-for="item in 3"
-          :key="item"
+          v-for="item in comment"
+          :key="item.id"
+          @click="gotoDetail(item.id)"
         >
           <div class="PDComment_content_comment_item_author">
-            <img src="../../../assets/imgs/main/author.png" alt="" />
+            <img
+              :src="item.userPic"
+              alt=""
+              class="PDComment_content_comment_item_author_img"
+            />
             <span class="PDComment_content_comment_item_name">
-              精神病院里的精神病患者
+              {{ item.userName }}
             </span>
           </div>
           <div class="PDComment_content_comment_message">
+            <div
+              class="PDComment_content_comment_message_title"
+              v-if="item.title"
+            >
+              {{ item.title }}
+            </div>
             <div class="PDComment_content_comment_message_main">
-              产品经理good! 产品经理good! 产品经理good! 产品经理good!
-              产品经理good! 产品经理good! 产品经理good! 产品经理good!
-              产品经理good! 产品经理good!
+              {{ item.content }}
+            </div>
+            <div
+              class="PDComment_content_comment_message_image"
+              v-if="item.image"
+            >
+              <img
+                :src="item.image"
+                class="PDComment_content_comment_message_image_img"
+              />
             </div>
             <div class="PDComment_content_comment_message_other">查看更多</div>
-            <div>
-              <span class="PDComment_content_comment_message_good">
-                <img src="../../../assets/imgs/common/good.png" alt="点赞" />
-                <span class="PDComment_content_comment_message_good_count"
-                  >999</span
-                >
-              </span>
-            </div>
           </div>
         </li>
       </ul>
+      <div class="PDComment_content_nothing" v-if="comment.length === 0">
+        暂无相关评论！
+      </div>
     </div>
   </div>
 </template>
 
 <script>
 import "./PDComment.scss";
+import { reactive, toRefs } from "vue";
+import { useRouter } from "vue-router";
 
 export default {
-  setup() {
-    return {};
+  props: ["comment"],
+
+  setup(props) {
+    const router = useRouter();
+
+    const state = reactive({
+      like: props.comment.like,
+    });
+
+    const gotoDetail = (id) => {
+      router.push({
+        path: "/trendsDetails",
+        query: {
+          id,
+        },
+      });
+    };
+    return {
+      ...toRefs(state),
+      gotoDetail,
+    };
   },
 };
 </script>

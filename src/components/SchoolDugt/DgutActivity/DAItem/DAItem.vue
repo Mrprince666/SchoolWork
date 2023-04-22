@@ -2,19 +2,17 @@
   <div class="DAItem">
     <div class="DAItem_left">
       <div class="DAItem_image">
-        <img
-          class="DAItem_image_img"
-          src="../../../../assets/imgs/main/tengxu_logo.jpg"
-        />
+        <img class="DAItem_image_img" :src="activity.pic" />
       </div>
       <div class="DAItem_content">
         <div class="DAItem_content_name">
-          中铁四集团第五工程有限公司 宣讲会（线下）
+          {{ activity.title }}
         </div>
         <div class="DAItem_content_time">
-          宣讲时间：2023-03-31 15:00:00--2023-03-31 16:30:00
+          宣讲时间：{{ standardAllTime(+activity.startTime) }} 至
+          {{ standardAllTime(+activity.endTime) }}
         </div>
-        <div class="DAItem_content_address">地点：学生中心A108</div>
+        <div class="DAItem_content_address">地点：{{ activity.place }}</div>
       </div>
     </div>
 
@@ -26,10 +24,15 @@
 
 <script>
 import "./DAItem.scss";
+import { standardAllTime } from "../../../../assets/js/standardTime";
 
 export default {
+  props: ["activity"],
+
   setup() {
-    return {};
+    return {
+      standardAllTime,
+    };
   },
 };
 </script>

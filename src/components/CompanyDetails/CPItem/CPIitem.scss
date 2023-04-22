@@ -38,7 +38,8 @@
       display: flex;
       column-gap: 10px;
 
-      li{
+      &_content{
+        display: inline-block;
         padding: 4px 10px;
         font-size: 13px;
         border-radius: 4px;
@@ -56,11 +57,16 @@
     }
 
     &_content{
-      margin-left: 15px;
+      margin-left: 25px;
       display: flex;
       flex-direction: column;
       row-gap: 5px;
       justify-content: center;
+
+      &_pname{
+        color: #666;
+        font-size: 13px;
+      }
     }
   }
 }

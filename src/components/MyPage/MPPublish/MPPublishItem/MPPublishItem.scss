@@ -9,6 +9,13 @@
     margin-bottom: 10px;
   }
 
+  &_image{
+    margin-top: 5px;
+    &_img{
+      max-height: 80px;
+    }
+  }
+
   &_content{
     width: 800px;
     

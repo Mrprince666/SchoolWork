@@ -85,7 +85,7 @@
       margin-top: 15px;
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      width: 1000px;
+      width: 1100px;
       gap: 10px;
       margin-left: 15px;
 
@@ -99,7 +99,7 @@
           height: 5px;
           content: '';
           left: -10px;
-          top: 50%;
+          top: 8px;
           transform: translate(-50%);
           background-color: rgb(0, 146, 65);
           border-radius: 50%;
@@ -128,7 +128,7 @@
 
   &_table{
     &_name{
-      width: 150px;
+      width: 200px;
     }
 
     &_address{
@@ -144,7 +144,7 @@
     }
 
     &_request{
-      width: 480px;
+      width: 430px;
     }
 
     &_time{
@@ -190,5 +190,42 @@
     background-color: rgba(0, 146, 65, 0.5);
     padding: 10px;
     color: #fff;
+  }
+
+  &_button{
+    border: none;
+    outline: none;
+    background-color: rgb(0, 146, 65);
+    padding: 8px 20px;
+    color: #fff;
+    cursor: pointer;
+    border-radius: 3px;
+  }
+
+  &_nothing{
+    text-align: center;
+    font-size: 18px;
+
+  }
+
+  &_notes{
+    background-color: rgb(245,245,245);
+    padding: 10px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    column-gap: 30px;
+    border-radius: 5px;
+
+    &_img{
+      width: 25px;
+      height: 25px;
+    }
+
+    &_check{
+      a{
+        color: rgb(0, 146, 65);
+      }
+    }
   }
 }

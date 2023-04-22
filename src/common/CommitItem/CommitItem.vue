@@ -2,18 +2,21 @@
   <div class="CommitItem">
     <div class="CommitItem_header">
       <AuthorHeader
-        :userName="comment.userName"
-        :pic="comment.pic"
-        :time="comment.time"
-        :position="comment.name"
+        :userName="commentList.userName"
+        :pic="commentList.pic"
+        :time="commentList.time"
+        :position="commentList.name"
       />
     </div>
     <div class="CommitItem_content">
       <CommitContent
-        :title="comment.title"
-        :content="comment.content"
-        :like="comment.like"
-        :commentId="comment.id"
+        :title="commentList.title"
+        :content="commentList.content"
+        :like="commentList.like"
+        :commentId="commentList.id"
+        :pName="commentList.pName"
+        :shortName="commentList.shortName"
+        :image="commentList.image"
       />
     </div>
   </div>
@@ -23,7 +26,7 @@
 import "./CommitItem.scss";
 import AuthorHeader from "../AuthorHeader/AuthorHeader.vue";
 import CommitContent from "../CommitContent/CommitContent.vue";
-import { onMounted, reactive, toRefs } from "vue";
+import { reactive, toRefs, watch } from "vue";
 
 export default {
   components: {
@@ -35,12 +38,16 @@ export default {
 
   setup(props) {
     const state = reactive({
-      comment: {},
+      commentList: {},
     });
 
-    onMounted(() => {
-      state.comment = props.comment;
-    });
+    watch(
+      () => props.comment,
+      (val) => {
+        state.commentList = val;
+      },
+      { immediate: true }
+    );
 
     return {
       ...toRefs(state),

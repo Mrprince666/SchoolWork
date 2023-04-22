@@ -1,10 +1,6 @@
 <template>
   <div class="AuthorHeader">
-    <img
-      class="AuthorHeader_pic"
-      src="../../assets/imgs/main/author.png"
-      alt="作者头像"
-    />
+    <img class="AuthorHeader_pic" :src="pic" alt="作者头像" />
     <div class="AuthorHeader_right">
       <div class="AuthorHeader_right_name">{{ userName }}</div>
       <div class="AuthorHeader_right_content">

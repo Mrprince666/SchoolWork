@@ -3,15 +3,15 @@
     <div class="CPWelfare_header">工作时间及福利</div>
     <div class="CPWelfare_item">
       <img src="../../../assets/imgs/common/time.png" alt="" />
-      <span>上午10:00 - 下午07:00</span>
+      <span>{{ workTimeStart }} - {{ workTimeEnd }}</span>
     </div>
     <div class="CPWelfare_item">
       <img src="../../../assets/imgs/common/holiday.png" alt="" />
-      <span>双休、弹性工作</span>
+      <span>{{ workTimeType }}</span>
     </div>
     <div class="CPWelfare_content">
       <ul class="CPWelfare_content_ul">
-        <li v-for="item in 8" :key="item">五险一金</li>
+        <li v-for="item in treatment" :key="item.id">{{ item.content }}</li>
       </ul>
     </div>
   </div>
@@ -21,6 +21,7 @@
 import "./CPWelfare.scss";
 
 export default {
+  props: ["workTimeEnd", "workTimeStart", "workTimeType", "treatment"],
   setup() {
     return {};
   },

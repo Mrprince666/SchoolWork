@@ -14,12 +14,18 @@
     display: grid;
     grid-template-columns: repeat(2, 400px);
     row-gap: 20px;
+    padding-left: 150px;
   }
 
   &_item{
     display: flex;
     flex-direction: column;
     row-gap: 10px;
+
+    &_select{
+      width: 320px !important;
+      height: 40px !important;
+    }
 
     &_title{}
 
@@ -40,10 +46,12 @@
   &_flooter{
     background-color: #fff;
     padding: 20px;
-    padding-bottom: 60px;
+    padding-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
 
     &_list{
-      float: right;
+      
     }
 
     &_cancel{
@@ -53,6 +61,7 @@
       padding: 8px 25px;
       margin-right: 20px;
       border-radius: 3px;
+      cursor: pointer;
     }
 
     &_define{
@@ -62,6 +71,37 @@
       color: #fff;
       padding: 8px 25px;
       border-radius: 3px;
+      cursor: pointer;
+    }
+  }
+
+  &_password{
+    display: flex;
+    flex-direction: column;
+    row-gap: 20px;
+    align-items: center;
+    
+    input {
+      width: 200px;
+      height: 25px;
+      outline: none;
+      border: 1px solid #666;
+      border-radius: 3px;
+      padding: 3px;
+
+      &:focus{
+        border: 1px solid rgb(0, 146, 65);
+      }
+    }
+  }
+
+  &_pic{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &_img{
+      margin-right: 20px;
     }
   }
 }

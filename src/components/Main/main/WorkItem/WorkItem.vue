@@ -2,18 +2,26 @@
   <div class="WorkItem">
     <div class="WorkItem_top">
       <span>{{ position.name }}</span>
-      <span class="WorkItem_top_money"
-        >{{ position.salaryLow }}-{{ position.salaryUp }}K·{{
+      <span class="WorkItem_top_money" v-if="position.salaryType === 0">
+        {{ position.salaryLow }}-{{ position.salaryUp }}K·{{
           position.salaryNumber
-        }}薪</span
-      >
+        }}薪
+      </span>
+      <span class="WorkItem_top_money" v-if="position.salaryType === 1">
+        {{ position.salaryLow }}百/天
+      </span>
+      <span class="WorkItem_top_money" v-if="position.salaryType === 2">
+        {{ position.salaryLow }}元/小时
+      </span>
     </div>
     <ul class="WorkItem_tab">
-      <li v-for="item in describe" :key="item.id">{{ item.content }}</li>
+      <li v-for="item in describe" :key="item.id">
+        <span v-if="item.content">{{ item.content }}</span>
+      </li>
     </ul>
     <div class="WorkItem_bottom">
       <div class="WorkItem_bottom_name">
-        <img src="../../../../assets/imgs/main/tengxu_logo.jpg" alt="" />
+        <img :src="position.pic" alt="" />
         <span>{{ position.shortName }}</span>
       </div>
       <div>{{ position.territory }}</div>

@@ -2,35 +2,36 @@
   <div class="MPPersonal">
     <div class="MPPersonal_header">
       <div class="MPPersonal_img">
-        <img src="../../../assets/imgs/main/tengxu_logo.jpg" alt="" />
+        <img :src="userInfo.pic" alt="" />
       </div>
       <div class="MPPersonal_message">
-        <div class="MPPersonal_message_name">王子豪</div>
+        <div class="MPPersonal_message_name">{{ userInfo.userName }}</div>
         <ul class="MPPersonal_message_tab">
-          <li>23岁</li>
-          <li>23届应届生</li>
-          <li>本科</li>
+          <li v-if="userInfo.age">{{ userInfo.age }}岁</li>
+          <li v-if="userInfo.graduation">{{ userInfo.graduation }}</li>
         </ul>
       </div>
     </div>
     <div class="MPPersonal_button">
-      <button class="MPPersonal_button_edit">编辑信息</button>
+      <button class="MPPersonal_button_edit" @click="gotoUserInfo">
+        编辑信息
+      </button>
     </div>
     <ul class="MPPersonal_footer">
       <li class="MPPersonal_footer_item">
-        <span class="MPPersonal_footer_item_num">1000</span>
+        <span class="MPPersonal_footer_item_num">{{ countList.one }}</span>
         <span>已投递</span>
       </li>
       <li class="MPPersonal_footer_item">
-        <span class="MPPersonal_footer_item_num">100</span>
+        <span class="MPPersonal_footer_item_num">{{ countList.two }}</span>
         <span>被查看</span>
       </li>
       <li class="MPPersonal_footer_item">
-        <span class="MPPersonal_footer_item_num">0</span>
+        <span class="MPPersonal_footer_item_num">{{ countList.three }}</span>
         <span>已通过</span>
       </li>
       <li class="MPPersonal_footer_item">
-        <span class="MPPersonal_footer_item_num">0</span>
+        <span class="MPPersonal_footer_item_num">{{ countList.four }}</span>
         <span>邀面试</span>
       </li>
     </ul>
@@ -39,10 +40,28 @@
 
 <script>
 import "./MPPersonal.scss";
+import { useStore } from "vuex";
+import { reactive, toRefs, watch } from "vue";
 
 export default {
+  props: ["gotoUserInfo", "countList"],
+
   setup() {
-    return {};
+    const store = useStore();
+    const state = reactive({
+      userInfo: store.state.user.userInfo,
+    });
+
+    watch(
+      () => store.state.user.userInfo,
+      (val) => {
+        state.userInfo = val;
+      },
+      { immediate: true }
+    );
+    return {
+      ...toRefs(state),
+    };
   },
 };
 </script>

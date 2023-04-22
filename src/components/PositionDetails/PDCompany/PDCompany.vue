@@ -2,25 +2,25 @@
   <div class="PDCompany">
     <div class="PDCompany_header">公司基本信息</div>
     <div class="PDCompany_content">
-      <img src="../../../assets/imgs/main/tengxu_logo.jpg" alt="" />
-      <span>腾讯</span>
+      <img :src="pic" alt="" />
+      <span>{{ shortName }}</span>
     </div>
     <ul class="PDCompany_messge">
       <li>
         <img src="../../../assets/imgs/common/finance.png" alt="" />
-        <span>不需要融资</span>
+        <span>{{ finance }}</span>
       </li>
       <li>
         <img src="../../../assets/imgs/common/person.png" alt="" />
-        <span>10000人以上</span>
+        <span>{{ employeeNum }}</span>
       </li>
       <li>
         <img src="../../../assets/imgs/common/trade.png" alt="" />
-        <span>互联网</span>
+        <span>{{ territory }}</span>
       </li>
     </ul>
     <div class="PDCompany_bottom">
-      <button @click="gotoCompanyDetail">查看全部职位</button>
+      <button @click="gotoCompanyDetail(companyId)">查看全部职位</button>
     </div>
   </div>
 </template>
@@ -30,11 +30,24 @@ import "./PDCompany.scss";
 import { useRouter } from "vue-router";
 
 export default {
+  props: [
+    "companyId",
+    "finance",
+    "employeeNum",
+    "territory",
+    "pic",
+    "shortName",
+  ],
+
   setup() {
     const router = useRouter();
-    const gotoCompanyDetail = () => {
+
+    const gotoCompanyDetail = (companyId) => {
       router.push({
         name: "CompanyDetails",
+        query: {
+          companyId,
+        },
       });
     };
     return {

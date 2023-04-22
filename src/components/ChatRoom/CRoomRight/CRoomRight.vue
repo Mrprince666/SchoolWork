@@ -120,7 +120,6 @@ export default {
         }, 100);
         state.message = "";
       }
-      console.log(res);
     };
 
     return {

@@ -1,7 +1,12 @@
 .Login{
   &_login{
     height: 100%;
-    background-color: rgba(0, 146, 65, 0.5);
+    // background-color: rgba(0, 146, 65, 0.5);
+    background-image: url(../../assets/imgs/common/bg.webp);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-clip: content-box;
+    background-size: cover;
   }
 
   &_container{

@@ -26,7 +26,7 @@
         </li>
       </ul>
       <div v-else class="TrendsDetails_nothing">暂无评论！</div>
-      <div class="TrendsDetails_pagination" v-if="replyTotal !== 0">
+      <div class="TrendsDetails_pagination" v-if="replyTotal > pageSize">
         <el-pagination
           small
           background
@@ -106,12 +106,10 @@ export default {
         state.replyList = res.data;
         state.replyTotal = res.total;
       }
-      console.log(res);
     };
 
     const handleCurrentChange = (val) => {
       state.page = val;
-      console.log(val);
       getReply();
     };
 

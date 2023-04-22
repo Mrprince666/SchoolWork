@@ -1,6 +1,6 @@
 <template>
   <div class="CompanyItem">
-    <div class="CompanyItem_header">
+    <div class="CompanyItem_header" @click="gotoCompanyDetails(companyId)">
       <CompanyHeader :companyInfo="companyInfo" />
     </div>
     <div class="CompanyItem_post">
@@ -9,6 +9,7 @@
           class="CompanyItem_post_li"
           v-for="item in positionInfo"
           :key="item.id"
+          @click="gotoPositionDetails(item.id)"
         >
           <CompanyPost :positionInfo="item" />
         </li>
@@ -23,6 +24,7 @@ import CompanyPost from "./Post/CompanyPost.vue";
 import CompanyHeader from "./Header/CompanyHeader.vue";
 import { getHotCompany } from "../../../../request/company";
 import { reactive, toRefs, onMounted } from "vue";
+import { useRouter } from "vue-router";
 
 export default {
   components: {
@@ -32,6 +34,7 @@ export default {
   props: ["companyId"],
 
   setup(props) {
+    const router = useRouter();
     const state = reactive({
       companyInfo: {},
       positionInfo: [],
@@ -49,13 +52,31 @@ export default {
       if (res.status === 0) {
         state.companyInfo = res.data.companyInfo;
         state.positionInfo = res.data.positionInfo;
-        console.log(888, state);
       }
-      console.log(888, res);
+    };
+
+    const gotoCompanyDetails = (companyId) => {
+      router.push({
+        path: "/CompanyDetails",
+        query: {
+          companyId,
+        },
+      });
+    };
+
+    const gotoPositionDetails = (positionId) => {
+      router.push({
+        path: "/positionDetails",
+        query: {
+          positionId,
+        },
+      });
     };
 
     return {
       ...toRefs(state),
+      gotoCompanyDetails,
+      gotoPositionDetails,
     };
   },
 };

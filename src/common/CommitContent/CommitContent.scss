@@ -4,18 +4,33 @@
   &_title{
     font-weight: 600;
     margin-bottom: 10px;
+    font-size: 18px;
   }
 
   &_content{
+    font-size: 18px;
     overflow: hidden;
     text-overflow: ellipsis;
     display: -webkit-box;
     -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
+    cursor: pointer;
+  }
+
+  &_image{
+    margin-top: 10px;
+    &_img{
+      max-height: 120px;
+    }
   }
 
   &_active{
     color: rgb(0, 145, 65) !important;
+  }
+
+  &_module{
+    margin-top: 10px;
+    color: rgb(0, 145, 65);
   }
 
   &_footer{

@@ -19,7 +19,8 @@
     display: flex;
     column-gap: 20px;
 
-    &_item{
+    span{
+      display: inline-block;
       background-color: rgb(245, 245, 245);
       color: rgb(135, 135, 135);
       padding: 3px 10px;
